@@ -7,6 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
+import javax.swing.JOptionPane;
+
 import Control.Controller_Server;
 import View.Finestra_Server;
 
@@ -92,6 +94,12 @@ public class Server_P1 implements Runnable, Player{
 	public void risposta(Casella c) {
 		System.out.println("ho ricevuto");
 		this.tris.addSegno(2, c);
+		int v=tris.ControllaVincitore();
+		if(v==1) {
+			JOptionPane.showMessageDialog(f, "HAI VINTO");
+		}else if(v==2) {
+			JOptionPane.showMessageDialog(f, "HAI PERSO");
+		}
 		f.attivaCaselle(tris);
 	}
 }

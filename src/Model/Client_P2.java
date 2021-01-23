@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.Semaphore;
 
+import javax.swing.JOptionPane;
+
 import Control.Controller_Client;
 import View.Finestra_Client;
 
@@ -96,6 +98,12 @@ public class Client_P2 implements Runnable, Player{
 	
 	public void risposta(Casella c) {
 		this.tris.addSegno(1, c);
+		int v=tris.ControllaVincitore();
+		if(v==2) {
+			JOptionPane.showMessageDialog(f, "HAI VINTO");
+		}else if(v==1) {
+			JOptionPane.showMessageDialog(f, "HAI PERSO");
+		}
 		f.attivaCaselle(this.tris);
 	}
 

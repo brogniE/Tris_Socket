@@ -3,6 +3,10 @@ package Control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import Model.Casella;
 import Model.Server_P1;
 import Model.Tris;
@@ -12,6 +16,7 @@ public class Controller_Server implements ActionListener{
 
 	private Finestra_Server f;
 	private Server_P1 s;
+	private ImageIcon imgcerchio= new ImageIcon("src/img/cerchio.png");
 	
 	public Controller_Server(Finestra_Server f, Server_P1 s) {
 		super();
@@ -33,75 +38,39 @@ public class Controller_Server implements ActionListener{
 		Casella casella;
 		if(e.getSource()==f.getButton()) {
 			casella=new Casella(0, 0);
-			s.getTris().addSegno(1, casella);
-			f.getButton().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton(), casella);
 		}
 		if(e.getSource()==f.getButton_1()) {
 			casella=new Casella(1, 0);
-			s.getTris().addSegno(1, casella);
-			f.getButton_1().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_1(), casella);
 		}
 		if(e.getSource()==f.getButton_2()) {
 			casella=new Casella(2, 0);
-			s.getTris().addSegno(1, casella);
-			f.getButton_2().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_2(), casella);
 		}
 		if(e.getSource()==f.getButton_3()) {
 			casella=new Casella(0, 1);
-			s.getTris().addSegno(1, casella);
-			f.getButton_3().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_3(), casella);
 		}
 		if(e.getSource()==f.getButton_4()) {
 			casella=new Casella(1, 1);
-			s.getTris().addSegno(1, casella);
-			f.getButton_4().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_4(), casella);
 		}
 		if(e.getSource()==f.getButton_5()) {
 			casella=new Casella(2, 1);
-			s.getTris().addSegno(1, casella);
-			f.getButton_5().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_5(), casella);
 		}
 		if(e.getSource()==f.getButton_6()) {
 			casella=new Casella(0, 2);
-			s.getTris().addSegno(1, casella);
-			f.getButton_6().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_6(), casella);
 		}
 		if(e.getSource()==f.getButton_7()) {
 			casella=new Casella(1, 2);
-			s.getTris().addSegno(1, casella);
-			f.getButton_7().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_7(), casella);
 		}
 		if(e.getSource()==f.getButton_8()) {
 			casella=new Casella(2, 2);
-			s.getTris().addSegno(1, casella);
-			f.getButton_8().setText("1");
-			s.inviaCasella(casella);
-			f.bloccaCaselle();
-			s.riceviCasella();
+			this.avvioCasella(f.getButton_8(), casella);
 		}
 		
 	}
@@ -111,4 +80,19 @@ public class Controller_Server implements ActionListener{
 		f.getPanel_1().setVisible(true);
 	}
 	
+	
+	public void avvioCasella(JButton b, Casella c) {
+		s.getTris().addSegno(1, c);
+		b.setIcon(imgcerchio);
+		s.inviaCasella(c);
+		f.bloccaCaselle();
+		int v=s.getTris().ControllaVincitore();
+		if(v==1) {
+			JOptionPane.showMessageDialog(f, "HAI VINTO");
+		}else if(v==2) {
+			JOptionPane.showMessageDialog(f, "HAI PERSO");
+		}else if(v==0) {
+			s.riceviCasella();
+		}
+	}
 }

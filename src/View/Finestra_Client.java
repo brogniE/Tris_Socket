@@ -2,9 +2,12 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -70,7 +73,7 @@ public class Finestra_Client extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGioca.setBounds(127, 149, 57, 21);
+		btnGioca.setBounds(127, 149, 103, 59);
 		panel.add(btnGioca);
 
 		lblNome = new JLabel("Nome ");
@@ -258,26 +261,54 @@ public class Finestra_Client extends JFrame {
 		this.getButton_8().setEnabled(false);
 	}
 	public void attivaCaselle(Tris tris) {
-		String app;
+		ImageIcon imgcerchio= new ImageIcon("src/img/cerchio.png");
+		ImageIcon imgcroce= new ImageIcon("src/img/croce.png");
 		
-		app=""+tris.getCella(0, 0);
-		this.getButton().setText(app);
-		app=""+tris.getCella(1, 0);
-		this.getButton_1().setText(app);
-		app=""+tris.getCella(2, 0);
-		this.getButton_2().setText(app);
-		app=""+tris.getCella(0, 1);
-		this.getButton_3().setText(app);
-		app=""+tris.getCella(1, 1);
-		this.getButton_4().setText(app);
-		app=""+tris.getCella(2, 1);
-		this.getButton_5().setText(app);
-		app=""+tris.getCella(0, 2);
-		this.getButton_6().setText(app);
-		app=""+tris.getCella(1, 2);
-		this.getButton_7().setText(app);
-		app=""+tris.getCella(2, 2);
-		this.getButton_8().setText(app);
+		if(tris.getCella(0, 0)==1) {
+			this.getButton().setIcon(imgcerchio);
+		}else if(tris.getCella(0, 0)==2) {
+			this.getButton().setIcon(imgcroce);
+		}
+		if(tris.getCella(1, 0)==1) {
+			this.getButton_1().setIcon(imgcerchio);
+		}else if(tris.getCella(1, 0)==2) {
+			this.getButton_1().setIcon(imgcroce);
+		}
+		if(tris.getCella(2, 0)==1) {
+			this.getButton_2().setIcon(imgcerchio);
+		}else if(tris.getCella(2, 0)==2) {
+			this.getButton_2().setIcon(imgcroce);
+		}
+		if(tris.getCella(0, 1)==1) {
+			this.getButton_3().setIcon(imgcerchio);
+		}else if(tris.getCella(0, 1)==2) {
+			this.getButton_3().setIcon(imgcroce);
+		}
+		if(tris.getCella(1, 1)==1) {
+			this.getButton_4().setIcon(imgcerchio);
+		}else if(tris.getCella(1, 1)==2) {
+			this.getButton_4().setIcon(imgcroce);
+		}
+		if(tris.getCella(2, 1)==1) {
+			this.getButton_5().setIcon(imgcerchio);
+		}else if(tris.getCella(2, 1)==2) {
+			this.getButton_5().setIcon(imgcroce);
+		}
+		if(tris.getCella(0, 2)==1) {
+			this.getButton_6().setIcon(imgcerchio);
+		}else if(tris.getCella(0, 2)==2) {
+			this.getButton_6().setIcon(imgcroce);
+		}
+		if(tris.getCella(1, 2)==1) {
+			this.getButton_7().setIcon(imgcerchio);
+		}else if(tris.getCella(1, 2)==2) {
+			this.getButton_7().setIcon(imgcroce);
+		}
+		if(tris.getCella(2, 2)==1) {
+			this.getButton_8().setIcon(imgcerchio);
+		}else if(tris.getCella(2, 2)==2) {
+			this.getButton_8().setIcon(imgcroce);
+		}
 		
 		
 		if(tris.getCella(0, 0)==0)
@@ -299,5 +330,4 @@ public class Finestra_Client extends JFrame {
 		if(tris.getCella(2, 2)==0)
 			this.getButton_8().setEnabled(true);
 	}
-
 }
