@@ -310,7 +310,6 @@ public class Finestra_Client extends JFrame {
 			this.getButton_8().setIcon(imgcroce);
 		}
 		
-		
 		if(tris.getCella(0, 0)==0)
 			this.getButton().setEnabled(true);
 		if(tris.getCella(1, 0)==0)

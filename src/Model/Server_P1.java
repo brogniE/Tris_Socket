@@ -18,6 +18,7 @@ public class Server_P1 implements Runnable, Player{
 	private Socket socket;
 	private Tris tris;
 	private Semaphore s;
+	private ServerSocket serverSocket;
 	
 	public Server_P1(Finestra_Server f, Semaphore s) {
 		super();
@@ -38,7 +39,6 @@ public class Server_P1 implements Runnable, Player{
 
 	public void run() {
 		
-		ServerSocket serverSocket;
 		Casella c;
 		boolean connesso=true;
 		
@@ -65,6 +65,7 @@ public class Server_P1 implements Runnable, Player{
 	public void chiudiConnessione() {
 		try {
 			socket.close();
+			serverSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,9 +98,23 @@ public class Server_P1 implements Runnable, Player{
 		int v=tris.ControllaVincitore();
 		if(v==1) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			this.chiudiConnessione();
 		}else if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI PERSO");
-		}
-		f.attivaCaselle(tris);
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			this.chiudiConnessione();
+		}else if(v==3) {
+			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			this.chiudiConnessione();
+		}else
+			f.attivaCaselle(this.tris);
 	}
 }

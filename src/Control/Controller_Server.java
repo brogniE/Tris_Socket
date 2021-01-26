@@ -2,11 +2,13 @@ package Control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import Model.Avvio_Menu;
 import Model.Casella;
 import Model.Server_P1;
 import Model.Tris;
@@ -89,9 +91,24 @@ public class Controller_Server implements ActionListener{
 		int v=s.getTris().ControllaVincitore();
 		if(v==1) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			s.chiudiConnessione();
 		}else if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI PERSO");
-		}else if(v==0) {
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			s.chiudiConnessione();
+		}else if(v==3) {
+			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			s.chiudiConnessione();
+		}
+		else if(v==0) {
 			s.riceviCasella();
 		}
 	}

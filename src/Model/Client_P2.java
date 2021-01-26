@@ -99,12 +99,26 @@ public class Client_P2 implements Runnable, Player{
 	public void risposta(Casella c) {
 		this.tris.addSegno(1, c);
 		int v=tris.ControllaVincitore();
-		if(v==2) {
+		if(v==1) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
-		}else if(v==1) {
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			this.chiudiConnessione();
+		}else if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI PERSO");
-		}
-		f.attivaCaselle(this.tris);
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			this.chiudiConnessione();
+		}else if(v==3) {
+			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
+			this.chiudiConnessione();
+		}else
+			f.attivaCaselle(this.tris);
 	}
 
 }

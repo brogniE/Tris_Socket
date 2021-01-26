@@ -14,43 +14,64 @@ public class Tris {
 	
 	public int ControllaVincitore() {
 		int vincitore = 0;
-		int flag = 0;
 		int x = 0;
 		int y = 0;
 
-		while(y<3 && flag==0) {
-			if(tris[0][y]==tris[1][y] && tris[1][y]==tris[2][y]) {
+		while(y<3 && vincitore==0) {
+			if(tris[0][y]==tris[1][y] && tris[1][y]==tris[2][y] && tris[0][y]!=0) {
 				vincitore = tris[0][y];
-				flag = 1;
 			}
 			else {
 				y++;
 			}
 		}
 
-		while(x<3 && flag==0) {
-			if(tris[x][0]==tris[x][1] && tris[x][1]==tris[x][2]) {
+		while(x<3 && vincitore==0) {
+			if(tris[x][0]==tris[x][1] && tris[x][1]==tris[x][2] && tris[x][0]!=0) {
 				vincitore = tris[x][0];
-				flag = 1;
 			}
 			else {
 				x++;
 			}
 		}
 
-		if(tris[0][0]==tris[1][1] && tris[1][1]==tris[2][2] && flag==0) {
+		if(tris[0][0]==tris[1][1] && tris[1][1]==tris[2][2] && vincitore==0 && tris[0][0]!=0) {
 			vincitore = tris[0][0];
 		}
 
-		if(tris[0][2]==tris[1][1] && tris[1][1]==tris[2][0] && flag==0) {
+		if(tris[0][2]==tris[1][1] && tris[1][1]==tris[2][0] && vincitore==0 && tris[2][0]!=0) {
 			vincitore = tris[0][2];
+		}
+		if(vincitore==0) {
+			vincitore = this.pareggio();
 		}
 
 		return vincitore;
 	}
+	
 	public int getCella(int x, int y) {
 		return tris[x][y];
 	}
+	
+	public int pareggio() {
+		int i = 0;
+		int j = 0;
+		int vincitore = 3;
+		
+		while(vincitore==3 && i<3) {
+			j=0;
+			while(vincitore==3 && j<3) {
+				if(tris[i][j]==0) {
+					vincitore = 0;
+				}
+				j++;
+			}
+			i++;
+		}
+		
+		return vincitore;
+	}
+	
 	
 	public void addSegno(int player, Casella c) {
 		tris[c.getX()][c.getY()]=player;

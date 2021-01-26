@@ -2,12 +2,14 @@ package Control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.concurrent.Semaphore;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import Model.Avvio_Menu;
 import Model.Casella;
 import Model.Client_P2;
 import Model.Tris;
@@ -93,10 +95,31 @@ public class Controller_Client implements ActionListener{
 		c.inviaCasella(cs);
 		f.bloccaCaselle();
 		int v=c.getTris().ControllaVincitore();
-		if(v==2) {
-			JOptionPane.showMessageDialog(f, "HAI VINTO");
-		}else if(v==1) {
+		System.out.println("si");
+		if(v==1) {
+			System.out.println("hai perso");
 			JOptionPane.showMessageDialog(f, "HAI PERSO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			System.out.println("chiudo finestra");
+			Avvio_Menu m= new Avvio_Menu();
+			c.chiudiConnessione();
+		}else if(v==2) {
+			System.out.println("hai vinto");
+			JOptionPane.showMessageDialog(f, "HAI VINTO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			System.out.println("chiudo finestra");
+			Avvio_Menu m= new Avvio_Menu();
+			c.chiudiConnessione();
+		}else if(v==3) {
+			System.out.println("pareggioa");
+			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
+			System.out.println("chiudo finestra");
+			Avvio_Menu m= new Avvio_Menu();
+			c.chiudiConnessione();
 		}else if(v==0) {
 			c.riceviCasella();
 		}
