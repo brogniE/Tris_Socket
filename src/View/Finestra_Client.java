@@ -38,7 +38,9 @@ public class Finestra_Client extends JFrame {
 	private JButton button_7;
 	private JButton button_8;
 	private JLabel lblTurnoPlayer;
-	private JLabel lblPlayerVincitore;
+	private JLabel lblVittorieP;
+	private JLabel lblTurniTotali;
+	private JLabel lblTurniRimanenti;
 	/**
 	 * Create the frame.
 	 */
@@ -49,91 +51,99 @@ public class Finestra_Client extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-
-		panel = new JPanel();
-		panel.setBounds(0, 0, 412, 253);
-		contentPane.add(panel);
-		panel.setLayout(null);
-
-		lblIlNostroTris = new JLabel("Il nostro Tris");
-		lblIlNostroTris.setBounds(126, 26, 58, 13);
-		panel.add(lblIlNostroTris);
-
-		textField = new JTextField();
-		textField.setBounds(149, 80, 96, 19);
-		panel.add(textField);
-		textField.setColumns(10);
-
-		lblIpConcorrente = new JLabel("ip concorrente");
-		lblIpConcorrente.setBounds(53, 83, 66, 13);
-		panel.add(lblIpConcorrente);
-
-		btnGioca = new JButton("Gioca");
-		btnGioca.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnGioca.setBounds(127, 149, 103, 59);
-		panel.add(btnGioca);
-
-		lblNome = new JLabel("Nome ");
-		lblNome.setBounds(90, 49, 45, 13);
-		panel.add(lblNome);
-
-		textField_1 = new JTextField();
-		textField_1.setBounds(149, 49, 96, 19);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-
+		
+				panel = new JPanel();
+				panel.setBounds(0, 0, 412, 253);
+				contentPane.add(panel);
+				panel.setLayout(null);
+				
+						lblIlNostroTris = new JLabel("Il nostro Tris");
+						lblIlNostroTris.setBounds(126, 26, 58, 13);
+						panel.add(lblIlNostroTris);
+						
+								textField = new JTextField();
+								textField.setBounds(149, 80, 96, 19);
+								panel.add(textField);
+								textField.setColumns(10);
+								
+										lblIpConcorrente = new JLabel("Indirizzo stanza");
+										lblIpConcorrente.setBounds(23, 83, 96, 13);
+										panel.add(lblIpConcorrente);
+										
+												btnGioca = new JButton("Gioca");
+												btnGioca.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+													}
+												});
+												btnGioca.setBounds(127, 149, 103, 59);
+												panel.add(btnGioca);
+												
+														lblNome = new JLabel("Nome ");
+														lblNome.setBounds(23, 49, 112, 13);
+														panel.add(lblNome);
+														
+																textField_1 = new JTextField();
+																textField_1.setBounds(149, 49, 96, 19);
+																panel.add(textField_1);
+																textField_1.setColumns(10);
+		
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBounds(0, 0, 416, 243);
 		contentPane.add(panel_1);
-
+				
 		button = new JButton("");
 		button.setBounds(61, 43, 56, 56);
 		panel_1.add(button);
-
+						
 		button_1 = new JButton("");
 		button_1.setBounds(117, 43, 56, 56);
 		panel_1.add(button_1);
-
+								
 		button_2 = new JButton("");
 		button_2.setBounds(173, 43, 56, 56);
 		panel_1.add(button_2);
-
+										
 		button_3 = new JButton("");
 		button_3.setBounds(61, 99, 56, 56);
 		panel_1.add(button_3);
-
+												
 		button_4 = new JButton("");
 		button_4.setBounds(117, 99, 56, 56);
 		panel_1.add(button_4);
-
+														
 		button_5 = new JButton("");
 		button_5.setBounds(173, 99, 56, 56);
 		panel_1.add(button_5);
-
+																
 		button_6 = new JButton("");
 		button_6.setBounds(61, 155, 56, 56);
 		panel_1.add(button_6);
-
+																		
 		button_7 = new JButton("");
 		button_7.setBounds(117, 155, 56, 56);
 		panel_1.add(button_7);
-
+																				
 		button_8 = new JButton("");
 		button_8.setBounds(173, 155, 56, 56);
 		panel_1.add(button_8);
-
-		lblTurnoPlayer = new JLabel("Turno Player : 2");
-		lblTurnoPlayer.setBounds(261, 70, 101, 13);
+																						
+		lblTurnoPlayer = new JLabel("Vittorie P1");
+		lblTurnoPlayer.setBounds(282, 102, 134, 13);
 		panel_1.add(lblTurnoPlayer);
-
-		lblPlayerVincitore = new JLabel("Player 1 vincitore");
-		lblPlayerVincitore.setBounds(259, 110, 101, 13);
-		panel_1.add(lblPlayerVincitore);
-
+																										
+		lblVittorieP = new JLabel("Vittorie P2");
+		lblVittorieP.setBounds(282, 125, 134, 13);
+		panel_1.add(lblVittorieP);
+																										
+		lblTurniTotali = new JLabel("Turni totali");
+		lblTurniTotali.setBounds(282, 25, 134, 13);
+		panel_1.add(lblTurniTotali);
+																										
+		lblTurniRimanenti = new JLabel("Turni rimanenti");
+		lblTurniRimanenti.setBounds(282, 43, 134, 13);
+		panel_1.add(lblTurniRimanenti);
+																										
 		panel_1.setVisible(false);
 	}
 
@@ -249,6 +259,38 @@ public class Finestra_Client extends JFrame {
 		this.button_8 = button_8;
 	}
 	
+	public JLabel getLblTurnoPlayer() {
+		return lblTurnoPlayer;
+	}
+
+	public void setLblTurnoPlayer(JLabel lblTurnoPlayer) {
+		this.lblTurnoPlayer = lblTurnoPlayer;
+	}
+
+	public JLabel getLblVittorieP() {
+		return lblVittorieP;
+	}
+
+	public void setLblVittorieP(JLabel lblVittorieP) {
+		this.lblVittorieP = lblVittorieP;
+	}
+
+	public JLabel getLblTurniTotali() {
+		return lblTurniTotali;
+	}
+
+	public void setLblTurniTotali(JLabel lblTurniTotali) {
+		this.lblTurniTotali = lblTurniTotali;
+	}
+
+	public JLabel getLblTurniRimanenti() {
+		return lblTurniRimanenti;
+	}
+
+	public void setLblTurniRimanenti(JLabel lblTurniRimanenti) {
+		this.lblTurniRimanenti = lblTurniRimanenti;
+	}
+	
 	public void bloccaCaselle() {
 		this.getButton().setEnabled(false);
 		this.getButton_1().setEnabled(false);
@@ -328,5 +370,17 @@ public class Finestra_Client extends JFrame {
 			this.getButton_7().setEnabled(true);
 		if(tris.getCella(2, 2)==0)
 			this.getButton_8().setEnabled(true);
+	}
+	
+	public void resettaCelle() {
+		this.getButton().setIcon(null);
+		this.getButton_1().setIcon(null);
+		this.getButton_2().setIcon(null);
+		this.getButton_3().setIcon(null);
+		this.getButton_4().setIcon(null);
+		this.getButton_5().setIcon(null);
+		this.getButton_6().setIcon(null);
+		this.getButton_7().setIcon(null);
+		this.getButton_8().setIcon(null);
 	}
 }

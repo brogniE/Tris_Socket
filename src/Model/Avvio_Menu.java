@@ -1,5 +1,7 @@
 package Model;
 
+import java.awt.Point;
+
 import Control.Controller_Menu;
 import View.Finestra_Menu;
 

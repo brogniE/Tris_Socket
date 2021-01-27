@@ -75,9 +75,12 @@ public class Tris {
 	
 	public void addSegno(int player, Casella c) {
 		tris[c.getX()][c.getY()]=player;
+	}
+	
+	public void azzera() {
 		for(int i=0; i<3;i++) {
 			for(int j=0;j<3;j++)
-				System.out.println(tris[i][j]);
+				tris[i][j]=0;
 		}
 	
 	}

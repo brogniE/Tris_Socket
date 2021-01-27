@@ -19,11 +19,19 @@ public class Client_P2 implements Runnable, Player{
 	private Finestra_Client f;
 	private Tris tris;
 	private Semaphore s;
+	private Controller_Client ct;
+	
+	private String nome;
+	private String nomeAvversario;
+	private int turni;
+	
+	private int vittorieP1=0;
+	private int vittorieP2=0;
 	
 	public Client_P2(Finestra_Client f, Semaphore s) {
 		super();
 		this.f=f;
-		Controller_Client ct = new Controller_Client(f, this);
+		ct = new Controller_Client(f, this);
 		tris=new Tris();
 		this.s=s;
 	}
@@ -52,13 +60,77 @@ public class Client_P2 implements Runnable, Player{
 		this.s = s;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getNomeAvversario() {
+		return nomeAvversario;
+	}
+
+	public void setNomeAvversario(String nomeAvversario) {
+		this.nomeAvversario = nomeAvversario;
+	}
+
+	public int getTurni() {
+		return turni;
+	}
+
+	public void setTurni(int turni) {
+		this.turni = turni;
+	}
+
+	public int getVittorieP1() {
+		return vittorieP1;
+	}
+
+	public void setVittorieP1(int vittorieP1) {
+		this.vittorieP1 = vittorieP1;
+	}
+
+	public int getVittorieP2() {
+		return vittorieP2;
+	}
+
+	public void setVittorieP2(int vittorieP2) {
+		this.vittorieP2 = vittorieP2;
+	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub 
 		Casella c;
 		try {
 			socket =new Socket(ipServer, 9999);
-				s.release();
+			
+			Pacchetto_Avvio pacchetto= new Pacchetto_Avvio(this.nome);
+			
+			try {
+				ObjectInputStream streamPacchettoIn = new ObjectInputStream(socket.getInputStream());
+				pacchetto= (Pacchetto_Avvio)streamPacchettoIn.readObject();
+				this.nomeAvversario=pacchetto.getNome();
+				this.turni=pacchetto.getTurni();
+				
+				pacchetto=new Pacchetto_Avvio(nome);
+				ObjectOutputStream streamPacchettoOut = new ObjectOutputStream(socket.getOutputStream());
+				streamPacchettoOut.writeObject(pacchetto);
+				
+				f.getLblTurniTotali().setText("Turni totali : "+turni);
+				ct.aggiornaLbl();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			s.release();
 	
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
@@ -99,26 +171,36 @@ public class Client_P2 implements Runnable, Player{
 	public void risposta(Casella c) {
 		this.tris.addSegno(1, c);
 		int v=tris.ControllaVincitore();
-		if(v==1) {
+		if(v==0)
+			f.attivaCaselle(this.tris);
+		else
+			terminaPartita(v);
+	}
+	
+	public void terminaPartita(int v) {
+		
+		if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
-			f.setVisible(false);
-			Avvio_Menu m= new Avvio_Menu();
-			this.chiudiConnessione();
-		}else if(v==2) {
+			vittorieP2++;
+		}else if(v==1) {
 			JOptionPane.showMessageDialog(f, "HAI PERSO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
-			f.setVisible(false);
-			Avvio_Menu m= new Avvio_Menu();
-			this.chiudiConnessione();
+			vittorieP1++;
 		}else if(v==3) {
 			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+		}
+		if(turni==1) {
 			f.setVisible(false);
 			Avvio_Menu m= new Avvio_Menu();
-			this.chiudiConnessione();
-		}else
+			chiudiConnessione();
 			f.attivaCaselle(this.tris);
+		}else {
+			turni--;
+			f.resettaCelle();
+			tris.azzera();
+			f.attivaCaselle(this.tris);
+		}
+		ct.aggiornaLbl();
+		
 	}
 
 }

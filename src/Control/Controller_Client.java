@@ -43,6 +43,7 @@ public class Controller_Client implements ActionListener{
 		Casella casella;
 		if(e.getSource()==f.getBtnGioca()) {
 			c.setIpServer(f.getTextField().getText());
+			c.setNome(f.getTextField_1().getText());
 			Thread t = new Thread(c);
 			t.start();
 			f.getPanel().setVisible(false);
@@ -95,34 +96,41 @@ public class Controller_Client implements ActionListener{
 		c.inviaCasella(cs);
 		f.bloccaCaselle();
 		int v=c.getTris().ControllaVincitore();
-		System.out.println("si");
-		if(v==1) {
-			System.out.println("hai perso");
-			JOptionPane.showMessageDialog(f, "HAI PERSO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
-			f.setVisible(false);
-			System.out.println("chiudo finestra");
-			Avvio_Menu m= new Avvio_Menu();
-			c.chiudiConnessione();
-		}else if(v==2) {
-			System.out.println("hai vinto");
+		if(v==0) {
+			c.riceviCasella();
+		}else
+			terminaPartita(v);
+	}
+	
+public void terminaPartita(int v) {
+		
+		if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
-			f.setVisible(false);
-			System.out.println("chiudo finestra");
-			Avvio_Menu m= new Avvio_Menu();
-			c.chiudiConnessione();
+			c.setVittorieP2(c.getVittorieP2()+1);
+		}else if(v==1) {
+			JOptionPane.showMessageDialog(f, "HAI PERSO");
+			c.setVittorieP1(c.getVittorieP1()+1);
 		}else if(v==3) {
-			System.out.println("pareggioa");
 			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+		}
+		aggiornaLbl();
+		if(c.getTurni()==1) {
 			f.setVisible(false);
-			System.out.println("chiudo finestra");
 			Avvio_Menu m= new Avvio_Menu();
 			c.chiudiConnessione();
-		}else if(v==0) {
+		}else {
+			c.setTurni(c.getTurni()-1);
+			f.resettaCelle();
+			c.getTris().azzera();
 			c.riceviCasella();
 		}
+		
+	}
+
+	public void aggiornaLbl() {
+		f.getLblTurniRimanenti().setText("Turni rimanenti : "+(c.getTurni()-1));
+		f.getLblTurnoPlayer().setText("Vittorie "+c.getNome()+" : "+c.getVittorieP1());
+		f.getLblVittorieP().setText("Vittorie "+c.getNomeAvversario()+" : "+c.getVittorieP2());
 	}
 
 }

@@ -1,5 +1,6 @@
 package Control;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -33,6 +34,8 @@ public class Controller_Server implements ActionListener{
 		f.getButton_6().addActionListener(this);
 		f.getButton_7().addActionListener(this);
 		f.getButton_8().addActionListener(this);
+		
+		f.getBtnAvviaTris().addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -75,11 +78,30 @@ public class Controller_Server implements ActionListener{
 			this.avvioCasella(f.getButton_8(), casella);
 		}
 		
+		if(e.getSource()==f.getBtnAvviaTris()) {
+			s.setNome(f.getTextField().getText());
+			s.setTurni(Integer.parseInt((String)f.getComboBox().getSelectedItem()));
+			f.getPanel().setVisible(true);
+			f.getPanel_1().setVisible(false);
+			f.getPanel_2().setVisible(false);
+			Thread t = new Thread(s);
+			t.start();
+		}
+		
 	}
 	
 	public void AvvioPartita() {
 		f.getPanel().setVisible(false);
+		f.getPanel_1().setVisible(false);
+		f.getPanel_2().setVisible(true);
+	}
+	
+	public void avviaGioco() {
+		f.getPanel().setVisible(false);
 		f.getPanel_1().setVisible(true);
+		f.getPanel_2().setVisible(false);
+		f.getLblTurniTotali().setText("Turni totali : "+s.getTurni());
+		aggiornaLbl();
 	}
 	
 	
@@ -89,27 +111,41 @@ public class Controller_Server implements ActionListener{
 		s.inviaCasella(c);
 		f.bloccaCaselle();
 		int v=s.getTris().ControllaVincitore();
+		if(v==0) {
+			s.riceviCasella();
+		}else
+			terminaPartita(v);
+	}
+	
+	public void terminaPartita(int v) {
+		
 		if(v==1) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
-			f.setVisible(false);
-			Avvio_Menu m= new Avvio_Menu();
-			s.chiudiConnessione();
+			s.setVittorieP1(s.getVittorieP1()+1);
 		}else if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI PERSO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
-			f.setVisible(false);
-			Avvio_Menu m= new Avvio_Menu();
-			s.chiudiConnessione();
+			s.setVittorieP2(s.getVittorieP2()+1);
+
 		}else if(v==3) {
 			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
-			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+		}
+		if(s.getTurni()==1) {
 			f.setVisible(false);
 			Avvio_Menu m= new Avvio_Menu();
 			s.chiudiConnessione();
-		}
-		else if(v==0) {
+		}else {
+			s.setTurni(s.getTurni()-1);
+			f.resettaCelle();
+			s.getTris().azzera();
 			s.riceviCasella();
 		}
+		aggiornaLbl();
+		
+	}
+	
+	public void aggiornaLbl() {
+		f.getLblTurniRimanenti().setText("Turni rimanenti : "+(s.getTurni()-1));
+		f.getLblTurnoPlayer().setText("Vittorie "+s.getNome()+" : "+s.getVittorieP1());
+		f.getLblVittorieP().setText("Vittorie "+s.getNomeAvversario()+" : "+s.getVittorieP2());
 	}
 }
