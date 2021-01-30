@@ -106,9 +106,7 @@ public class Client_P2 implements Runnable, Player{
 		Casella c;
 		try {
 			socket =new Socket(ipServer, 9999);
-
 			Pacchetto_Avvio pacchetto= new Pacchetto_Avvio(this.nome);
-
 			try {
 				ObjectInputStream streamPacchettoIn = new ObjectInputStream(socket.getInputStream());
 				pacchetto= (Pacchetto_Avvio)streamPacchettoIn.readObject();
@@ -139,8 +137,8 @@ public class Client_P2 implements Runnable, Player{
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			this.erroreConnessione();
 			System.out.println(e1.getMessage());
+			this.erroreConnessione();
 		}
 	}
 
@@ -207,11 +205,12 @@ public class Client_P2 implements Runnable, Player{
 	}
 	
 	public void erroreConnessione() {
+		s.release();
 		JOptionPane.showMessageDialog(f, "Errore di connessione");
-		f.getPanelMenu().setVisible(true);
 		f.getPanelServerPlay().setVisible(false);
 		f.getPanelServerWait().setVisible(false);
 		f.getPanelStartServer().setVisible(false);
+		f.getPanelMenu().setVisible(true);
 	}
 
 }

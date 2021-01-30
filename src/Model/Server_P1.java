@@ -127,8 +127,8 @@ public class Server_P1 implements Runnable, Player{
 
 	public void chiudiConnessione() {
 		try {
-			socket.close();
 			serverSocket.close();
+			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -192,6 +192,8 @@ public class Server_P1 implements Runnable, Player{
 	}
 	
 	public void erroreConnessione() {
+		s.release();
+		chiudiConnessione();
 		JOptionPane.showMessageDialog(f, "Errore di connessione");
 		f.getPanelMenu().setVisible(true);
 		f.getPanelServerPlay().setVisible(false);

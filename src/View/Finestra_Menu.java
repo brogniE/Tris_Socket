@@ -30,6 +30,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Finestra_Menu extends JFrame {
 
@@ -86,96 +88,122 @@ public class Finestra_Menu extends JFrame {
 	private JPanel panelClientPlay;
 	private JButton btnIndietro1;
 	private JButton btnIndietro3;
+	private JButton btnImpostazioni;
 
-	public Finestra_Menu() {
-		/*try {
-			UIManager.setLookAndFeel(new FlatDarkLaf());
-		} catch (UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-		/*try {
-			UIManager.setLookAndFeel(new FlatDarkPurpleIJTheme());
-		} catch (UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-		try {
-			UIManager.setLookAndFeel(new FlatLightLaf());
-		} catch (UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+	public Finestra_Menu(int n) {
+		if(n==0) {
+			try {
+				UIManager.setLookAndFeel(new FlatLightLaf());
+			} catch (UnsupportedLookAndFeelException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-		/*try {
-			UIManager.setLookAndFeel(new FlatArcOrangeIJTheme());
-		} catch (UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+		if(n==1) {
+			try {
+				UIManager.setLookAndFeel(new FlatDarkLaf());
+			} catch (UnsupportedLookAndFeelException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPaneMenu = new JPanel();
 		contentPaneMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPaneMenu);
 		contentPaneMenu.setLayout(null);
-								
-										panelServerWait = new JPanel();
-										panelServerWait.setLayout(null);
-										panelServerWait.setBounds(0, 0, 416, 243);
-										contentPaneMenu.add(panelServerWait);
-										
-												lblIlNostroTris = new JLabel("Indirizzo stanza tris");
-												lblIlNostroTris.setBounds(91, 34, 142, 13);
-												panelServerWait.add(lblIlNostroTris);
-												
-														lblAttendiIlSecondo = new JLabel("Attendi il giocatore avversario ...");
-														lblAttendiIlSecondo.setBounds(91, 156, 252, 13);
-														panelServerWait.add(lblAttendiIlSecondo);
 														
-																lblLocalhost = new JLabel("");
-																lblLocalhost.setFont(new Font("Tahoma", Font.BOLD, 10));
-																lblLocalhost.setBounds(91, 57, 122, 13);
-																panelServerWait.add(lblLocalhost);
+																panelMenu = new JPanel();
+																panelMenu.setBounds(0, 0, 434, 260);
+																contentPaneMenu.add(panelMenu);
+																panelMenu.setLayout(null);
 																
-																		panelServerWait.setVisible(false);
-						
-								panelClientJoin = new JPanel();
-								panelClientJoin.setLayout(null);
-								panelClientJoin.setBounds(0, 0, 412, 253);
-								contentPaneMenu.add(panelClientJoin);
-								
-										lblIlNostroTris_1 = new JLabel("Il nostro Tris");
-										lblIlNostroTris_1.setBounds(126, 26, 58, 13);
-										panelClientJoin.add(lblIlNostroTris_1);
-										
-												textField_1 = new JTextField();
-												textField_1.setColumns(10);
-												textField_1.setBounds(149, 80, 96, 19);
-												panelClientJoin.add(textField_1);
-												
-														lblIpConcorrente = new JLabel("Indirizzo stanza");
-														lblIpConcorrente.setBounds(23, 83, 96, 13);
-														panelClientJoin.add(lblIpConcorrente);
-														
-																btnGioca = new JButton("Gioca");
-																btnGioca.setBounds(127, 149, 103, 59);
-																panelClientJoin.add(btnGioca);
-																
-																		lblNome_1 = new JLabel("Nome ");
-																		lblNome_1.setBounds(23, 49, 112, 13);
-																		panelClientJoin.add(lblNome_1);
+																		lblTris = new JLabel("TRIS");
+																		lblTris.setFont(new Font("Tahoma", Font.BOLD, 23));
+																		lblTris.setBounds(176, 37, 68, 28);
+																		panelMenu.add(lblTris);
 																		
-																				textField_2 = new JTextField();
-																				textField_2.setColumns(10);
-																				textField_2.setBounds(149, 49, 96, 19);
-																				panelClientJoin.add(textField_2);
+																				lblScegliereLopzione = new JLabel("Scegliere l'opzione");
+																				lblScegliereLopzione.setBounds(151, 103, 129, 14);
+																				panelMenu.add(lblScegliereLopzione);
 																				
-																				btnIndietro3 = new JButton("");
-																				btnIndietro3.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/indietro.png")));
-																				btnIndietro3.setBounds(0, 0, 39, 32);
-																				panelClientJoin.add(btnIndietro3);
+																						btnNewButton = new JButton("CREA GIOCO");
+																						btnNewButton.addActionListener(new ActionListener() {
+																							public void actionPerformed(ActionEvent e) {
+																							}
+																						});
+																						btnNewButton.setBounds(127, 139, 153, 28);
+																						panelMenu.add(btnNewButton);
+																						
+																								btnNewButton_1 = new JButton("UNISCITI AL GIOCO");
+																								btnNewButton_1.setBounds(127, 183, 153, 28);
+																								panelMenu.add(btnNewButton_1);
+																								
+																								btnImpostazioni = new JButton("");
+																								btnImpostazioni.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/luna.png")));
+																								btnImpostazioni.setBounds(404, 0, 30, 30);
+																								panelMenu.add(btnImpostazioni);
+																								
+																										panelMenu.setVisible(true);
+												
+														panelServerWait = new JPanel();
+														panelServerWait.setLayout(null);
+														panelServerWait.setBounds(0, 0, 416, 243);
+														contentPaneMenu.add(panelServerWait);
+														
+																lblIlNostroTris = new JLabel("Indirizzo stanza tris");
+																lblIlNostroTris.setBounds(91, 34, 142, 13);
+																panelServerWait.add(lblIlNostroTris);
+																
+																		lblAttendiIlSecondo = new JLabel("Attendi il giocatore avversario ...");
+																		lblAttendiIlSecondo.setBounds(91, 156, 252, 13);
+																		panelServerWait.add(lblAttendiIlSecondo);
+																		
+																				lblLocalhost = new JLabel("");
+																				lblLocalhost.setFont(new Font("Tahoma", Font.BOLD, 10));
+																				lblLocalhost.setBounds(91, 57, 122, 13);
+																				panelServerWait.add(lblLocalhost);
 																				
-																						panelClientJoin.setVisible(false);
+																						panelServerWait.setVisible(false);
+										
+												panelClientJoin = new JPanel();
+												panelClientJoin.setLayout(null);
+												panelClientJoin.setBounds(0, 0, 412, 253);
+												contentPaneMenu.add(panelClientJoin);
+												
+														lblIlNostroTris_1 = new JLabel("Il nostro Tris");
+														lblIlNostroTris_1.setBounds(126, 26, 58, 13);
+														panelClientJoin.add(lblIlNostroTris_1);
+														
+																textField_1 = new JTextField();
+																textField_1.setColumns(10);
+																textField_1.setBounds(149, 80, 96, 19);
+																panelClientJoin.add(textField_1);
+																
+																		lblIpConcorrente = new JLabel("Indirizzo stanza");
+																		lblIpConcorrente.setBounds(23, 83, 96, 13);
+																		panelClientJoin.add(lblIpConcorrente);
+																		
+																				btnGioca = new JButton("Gioca");
+																				btnGioca.setBounds(127, 149, 103, 59);
+																				panelClientJoin.add(btnGioca);
+																				
+																						lblNome_1 = new JLabel("Nome ");
+																						lblNome_1.setBounds(23, 49, 112, 13);
+																						panelClientJoin.add(lblNome_1);
+																						
+																								textField_2 = new JTextField();
+																								textField_2.setColumns(10);
+																								textField_2.setBounds(149, 49, 96, 19);
+																								panelClientJoin.add(textField_2);
+																								
+																								btnIndietro3 = new JButton("");
+																								btnIndietro3.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/indietro.png")));
+																								btnIndietro3.setBounds(0, 0, 39, 32);
+																								panelClientJoin.add(btnIndietro3);
+																								
+																										panelClientJoin.setVisible(false);
 		
 				panelStartServer = new JPanel();
 				panelStartServer.setLayout(null);
@@ -211,30 +239,6 @@ public class Finestra_Menu extends JFrame {
 														panelStartServer.add(btnIndietro1);
 														
 																panelStartServer.setVisible(false);
-
-		panelMenu = new JPanel();
-		panelMenu.setBounds(0, 0, 434, 260);
-		contentPaneMenu.add(panelMenu);
-		panelMenu.setLayout(null);
-
-		lblTris = new JLabel("TRIS");
-		lblTris.setFont(new Font("Tahoma", Font.BOLD, 23));
-		lblTris.setBounds(176, 37, 68, 28);
-		panelMenu.add(lblTris);
-
-		lblScegliereLopzione = new JLabel("Scegliere l'opzione");
-		lblScegliereLopzione.setBounds(151, 103, 129, 14);
-		panelMenu.add(lblScegliereLopzione);
-
-		btnNewButton = new JButton("CREA GIOCO");
-		btnNewButton.setBounds(127, 139, 153, 28);
-		panelMenu.add(btnNewButton);
-
-		btnNewButton_1 = new JButton("UNISCITI AL GIOCO");
-		btnNewButton_1.setBounds(127, 183, 153, 28);
-		panelMenu.add(btnNewButton_1);
-
-		panelMenu.setVisible(true);
 				
 						panelServerPlay = new JPanel();
 						panelServerPlay.setLayout(null);
@@ -709,7 +713,18 @@ public class Finestra_Menu extends JFrame {
 
 	public void setBtnIndietro3(JButton btnIndietro3) {
 		this.btnIndietro3 = btnIndietro3;
+	}	
+
+	public JButton getBtnImpostazioni() {
+		return btnImpostazioni;
 	}
+
+
+	public void setBtnImpostazioni(JButton btnImpostazioni) {
+		this.btnImpostazioni = btnImpostazioni;
+	}
+
+
 
 	public void bloccaCaselleServer() {
 		this.getButtonServer().setEnabled(false);

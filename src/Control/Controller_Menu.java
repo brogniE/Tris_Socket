@@ -5,18 +5,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.Semaphore;
 
+import javax.swing.JFrame;
+
 import Model.Client_P2;
 import Model.Server_P1;
 import View.Finestra_Menu;
 
 public class Controller_Menu implements ActionListener{
 	private Finestra_Menu f;
+	private int colore;
 
 	public Controller_Menu(Finestra_Menu f) {
 		super();
 		this.f = f;
+		colore=0;
 		f.getBtnNewButton().addActionListener(this);
 		f.getBtnNewButton_1().addActionListener(this);
+		f.getBtnImpostazioni().addActionListener(this);
 	}
 
 	@Override
@@ -33,6 +38,16 @@ public class Controller_Menu implements ActionListener{
 			Semaphore semaforoClient = new Semaphore(0);
 			Client_P2 client = new Client_P2(f, semaforoClient);
 
+		}
+		
+		if(e.getSource()==f.getBtnImpostazioni()) {
+			f.dispose();
+			colore=(colore+1)%2;
+			f=new Finestra_Menu(colore);
+			f.setVisible(true);
+			f.getBtnNewButton().addActionListener(this);
+			f.getBtnNewButton_1().addActionListener(this);
+			f.getBtnImpostazioni().addActionListener(this);
 		}
 
 	}
