@@ -3,10 +3,9 @@ package Control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.concurrent.Semaphore;
 
-import Model.Client_P2;
-import Model.Server_P1;
+import Model.Avvio_Client;
+import Model.Avvio_Server;
 import View.Finestra_Menu;
 
 public class Controller_Menu implements ActionListener{
@@ -23,19 +22,17 @@ public class Controller_Menu implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==f.getBtnNewButton()) {
-			Semaphore semaforoServer = new Semaphore(0);
-			Server_P1 server = new Server_P1(f, semaforoServer);
+			Avvio_Server m=new Avvio_Server();
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
 		}
 		if(e.getSource()==f.getBtnNewButton_1()) {
-			f.getPanelMenu().setVisible(false);
-			f.getPanelClientJoin().setVisible(true);
-
-			Semaphore semaforoClient = new Semaphore(0);
-			Client_P2 client = new Client_P2(f, semaforoClient);
-
+			Avvio_Client m=new Avvio_Client();
+			//f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+			f.setVisible(false);
 		}
-
+		
 	}
-
-
+	
+	
 }

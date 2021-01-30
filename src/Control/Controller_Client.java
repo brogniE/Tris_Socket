@@ -9,33 +9,32 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-
+import Model.Avvio_Menu;
 import Model.Casella;
 import Model.Client_P2;
 import Model.Tris;
-import View.Finestra_Menu;
+import View.Finestra_Client;
 
 public class Controller_Client implements ActionListener{
 
-	private Finestra_Menu f;
+	private Finestra_Client f;
 	private Client_P2 c;
 	private ImageIcon imgcroce= new ImageIcon("src/img/croce.png");
-
-	public Controller_Client(Finestra_Menu f, Client_P2 c) {
+	
+	public Controller_Client(Finestra_Client f, Client_P2 c) {
 		super();
 		this.f = f;
 		this.c = c;
 		f.getBtnGioca().addActionListener(this);
-		f.getButtonClient().addActionListener(this);
-		f.getButton_1Client().addActionListener(this);
-		f.getButton_2Client().addActionListener(this);
-		f.getButton_3Client().addActionListener(this);
-		f.getButton_4Client().addActionListener(this);
-		f.getButton_5Client().addActionListener(this);
-		f.getButton_6Client().addActionListener(this);
-		f.getButton_7Client().addActionListener(this);
-		f.getButton_8Client().addActionListener(this);
-		f.getBtnIndietro3().addActionListener(this);
+		f.getButton().addActionListener(this);
+		f.getButton_1().addActionListener(this);
+		f.getButton_2().addActionListener(this);
+		f.getButton_3().addActionListener(this);
+		f.getButton_4().addActionListener(this);
+		f.getButton_5().addActionListener(this);
+		f.getButton_6().addActionListener(this);
+		f.getButton_7().addActionListener(this);
+		f.getButton_8().addActionListener(this);
 	}
 
 	@Override
@@ -43,78 +42,68 @@ public class Controller_Client implements ActionListener{
 		// TODO Auto-generated method stub
 		Casella casella;
 		if(e.getSource()==f.getBtnGioca()) {
-			if(f.getTextField_2().getText().compareTo("")==0) {
-				JOptionPane.showMessageDialog(null, "nome non inserito", "errore", 3);
-				return;
-			}else {
-				c.setIpServer(f.getTextField_1().getText());
-				c.setNome(f.getTextField_2().getText());
-				Thread t = new Thread(c);
-				t.start();
-				f.getPanelMenu().setVisible(false);
-				f.getPanelClientJoin().setVisible(false);
-				f.getPanelClientPlay().setVisible(true);
-				f.bloccaCaselleClient();
-				c.riceviCasella();
-			}
+			c.setIpServer(f.getTextField().getText());
+			c.setNome(f.getTextField_1().getText());
+			Thread t = new Thread(c);
+			t.start();
+			f.getPanel().setVisible(false);
+			f.getPanel_1().setVisible(true);
+			f.bloccaCaselle();
+			c.riceviCasella();
 		}
-
-		if(e.getSource()==f.getButtonClient()) {
+				
+		if(e.getSource()==f.getButton()) {
 			casella=new Casella(0, 0);
-			this.avvioCasella(f.getButtonClient(), casella);
+			this.avvioCasella(f.getButton(), casella);
 		}
-		if(e.getSource()==f.getButton_1Client()) {
+		if(e.getSource()==f.getButton_1()) {
 			casella=new Casella(1, 0);
-			this.avvioCasella(f.getButton_1Client(), casella);
+			this.avvioCasella(f.getButton_1(), casella);
 		}
-		if(e.getSource()==f.getButton_2Client()) {
+		if(e.getSource()==f.getButton_2()) {
 			casella=new Casella(2, 0);
-			this.avvioCasella(f.getButton_2Client(), casella);
+			this.avvioCasella(f.getButton_2(), casella);
 		}
-		if(e.getSource()==f.getButton_3Client()) {
+		if(e.getSource()==f.getButton_3()) {
 			casella=new Casella(0, 1);
-			this.avvioCasella(f.getButton_3Client(), casella);
+			this.avvioCasella(f.getButton_3(), casella);
 		}
-		if(e.getSource()==f.getButton_4Client()) {
+		if(e.getSource()==f.getButton_4()) {
 			casella=new Casella(1, 1);
-			this.avvioCasella(f.getButton_4Client(), casella);
+			this.avvioCasella(f.getButton_4(), casella);
 		}
-		if(e.getSource()==f.getButton_5Client()) {
+		if(e.getSource()==f.getButton_5()) {
 			casella=new Casella(2, 1);
-			this.avvioCasella(f.getButton_5Client(), casella);
+			this.avvioCasella(f.getButton_5(), casella);
 		}
-		if(e.getSource()==f.getButton_6Client()) {
+		if(e.getSource()==f.getButton_6()) {
 			casella=new Casella(0, 2);
-			this.avvioCasella(f.getButton_6Client(), casella);
+			this.avvioCasella(f.getButton_6(), casella);
 		}
-		if(e.getSource()==f.getButton_7Client()) {
+		if(e.getSource()==f.getButton_7()) {
 			casella=new Casella(1, 2);
-			this.avvioCasella(f.getButton_7Client(), casella);
+			this.avvioCasella(f.getButton_7(), casella);
 		}
-		if(e.getSource()==f.getButton_8Client()) {
+		if(e.getSource()==f.getButton_8()) {
 			casella=new Casella(2, 2);
-			this.avvioCasella(f.getButton_8Client(), casella);
-		}
-		if(e.getSource()==f.getBtnIndietro3()) {
-			f.getPanelClientJoin().setVisible(false);
-			f.getPanelMenu().setVisible(true);
+			this.avvioCasella(f.getButton_8(), casella);
 		}
 	}
-
+	
 	public void avvioCasella(JButton b, Casella cs) {
 		c.getTris().addSegno(2, cs);
 		b.setIcon(imgcroce);
 		c.inviaCasella(cs);
-		f.bloccaCaselleClient();
+		f.bloccaCaselle();
 		int v=c.getTris().ControllaVincitore();
 		if(v==0) {
 			c.riceviCasella();
 		}else
 			terminaPartita(v);
 	}
-
+	
 public void terminaPartita(int v) {
-
+		
 		if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
 			c.setVittorieP2(c.getVittorieP2()+1);
@@ -126,22 +115,22 @@ public void terminaPartita(int v) {
 		}
 		aggiornaLbl();
 		if(c.getTurni()==1) {
-			f.getPanelClientPlay().setVisible(false);
-			f.getPanelMenu().setVisible(true);
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
 			c.chiudiConnessione();
 		}else {
 			c.setTurni(c.getTurni()-1);
-			f.resettaCelleClient();
+			f.resettaCelle();
 			c.getTris().azzera();
 			c.riceviCasella();
 		}
-
+		
 	}
 
 	public void aggiornaLbl() {
-		f.getLblTurniRimanentiClient().setText("Turni rimanenti : "+(c.getTurni()-1));
-		f.getLblVittorieP2Client().setText("Vittorie "+c.getNome()+" : "+c.getVittorieP2());
-		f.getLblVittorieP1Client().setText("Vittorie "+c.getNomeAvversario()+" : "+c.getVittorieP1());
+		f.getLblTurniRimanenti().setText("Turni rimanenti : "+(c.getTurni()-1));
+		f.getLblTurnoPlayer().setText("Vittorie "+c.getNome()+" : "+c.getVittorieP1());
+		f.getLblVittorieP().setText("Vittorie "+c.getNomeAvversario()+" : "+c.getVittorieP2());
 	}
 
 }

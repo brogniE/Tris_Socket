@@ -10,33 +10,32 @@ import java.util.concurrent.Semaphore;
 import javax.swing.JOptionPane;
 
 import Control.Controller_Server;
-import View.Finestra_Menu;
+import View.Finestra_Server;
 
 public class Server_P1 implements Runnable, Player{
-	private Finestra_Menu f;
+	private Finestra_Server f;
 	private Socket socket;
 	private Tris tris;
 	private Semaphore s;
 	private ServerSocket serverSocket;
 	private Controller_Server ct;
-
+	
 	private String nome;
 	private String nomeAvversario;
 	private int turni;
-
+	
 	private int vittorieP1=0;
 	private int vittorieP2=0;
-
-	public Server_P1(Finestra_Menu f, Semaphore s) {
+	
+	public Server_P1(Finestra_Server f, Semaphore s) {
 		super();
 		this.f=f;
 		tris=new Tris();
 		this.s=s;
-		this.turni = 0;
 		ct=new Controller_Server(f, this);
 		ct.AvvioPartita();
 	}
-
+	
 	public Tris getTris() {
 		return tris;
 	}
@@ -44,7 +43,7 @@ public class Server_P1 implements Runnable, Player{
 	public void setTris(Tris tris) {
 		this.tris = tris;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -86,25 +85,25 @@ public class Server_P1 implements Runnable, Player{
 	}
 
 	public void run() {
-
+		
 		Casella c;
 		boolean connesso=true;
-
+		
 		try {
 			serverSocket= new ServerSocket(9999);
-
+			
 			while(connesso) {
-
+				
 				this.socket= serverSocket.accept();
 				Pacchetto_Avvio pacchetto= new Pacchetto_Avvio(this.nome, this.turni);
-
+				
 				try {
 					ObjectOutputStream streamPacchettoOut = new ObjectOutputStream(socket.getOutputStream());
 					streamPacchettoOut.writeObject(pacchetto);
 					ObjectInputStream streamPacchettoIn = new ObjectInputStream(socket.getInputStream());
 					pacchetto= (Pacchetto_Avvio)streamPacchettoIn.readObject();
 					nomeAvversario=pacchetto.getNome();
-
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -112,19 +111,19 @@ public class Server_P1 implements Runnable, Player{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				
 				connesso=false;
-
+				
 				ct.avviaGioco();
 			}
-
-
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void chiudiConnessione() {
 		try {
 			socket.close();
@@ -134,13 +133,13 @@ public class Server_P1 implements Runnable, Player{
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void inviaCasella(Casella c) {
-		InviaPacchetto i= new InviaPacchetto(c, socket, s, this);
+		InviaPacchetto i= new InviaPacchetto(c, socket, s);
 		Thread t= new Thread(i);
 		t.start();
 	}
-
+	
 	public Casella riceviCasella() {
 		try {
 			s.acquire();
@@ -154,19 +153,19 @@ public class Server_P1 implements Runnable, Player{
 		t.start();
 		return (Casella)r.getPacchetto();
 	}
-
+	
 	public void risposta(Casella c) {
 		System.out.println("ho ricevuto");
 		this.tris.addSegno(2, c);
 		int v=tris.ControllaVincitore();
 		if(v==0)
-			f.attivaCaselleServer(this.tris);
+			f.attivaCaselle(this.tris);
 		else
 			terminaPartita(v);
 	}
 
 	public void terminaPartita(int v) {
-
+		
 		if(v==1) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
 			vittorieP1++;
@@ -177,26 +176,18 @@ public class Server_P1 implements Runnable, Player{
 			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
 		}
 		if(turni==1) {
-			f.getPanelServerPlay().setVisible(false);
-			f.getPanelMenu().setVisible(true);
+			f.setVisible(false);
+			Avvio_Menu m= new Avvio_Menu();
 			chiudiConnessione();
-			f.attivaCaselleServer(this.tris);
+			f.attivaCaselle(this.tris);
 		}else {
 			turni--;
-			f.resettaCelleServer();
+			f.resettaCelle();
 			tris.azzera();
-			f.attivaCaselleServer(this.tris);
+			f.attivaCaselle(this.tris);
 		}
 		ct.aggiornaLbl();
-
+		
 	}
 	
-	public void erroreConnessione() {
-		JOptionPane.showMessageDialog(f, "Errore di connessione");
-		f.getPanelMenu().setVisible(true);
-		f.getPanelServerPlay().setVisible(false);
-		f.getPanelServerWait().setVisible(false);
-		f.getPanelStartServer().setVisible(false);
-	}
-
 }

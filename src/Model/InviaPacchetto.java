@@ -9,14 +9,11 @@ public class InviaPacchetto implements Runnable{
 	private Object pacchetto;
 	private Socket socket;
 	private Semaphore s;
-	private Player c;
-	
-	public InviaPacchetto(Object pacchetto, Socket socket, Semaphore s, Player c) {
+	public InviaPacchetto(Object pacchetto, Socket socket, Semaphore s) {
 		super();
 		this.pacchetto = pacchetto;
 		this.socket = socket;
 		this.s=s;
-		this.c=c;
 	}
 
 	@Override
@@ -31,7 +28,6 @@ public class InviaPacchetto implements Runnable{
 			//streamPacchettoOut.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			c.erroreConnessione();
 			e.printStackTrace();
 		}
 	}

@@ -1,13 +1,10 @@
-import Control.Controller_Menu;
-import View.Finestra_Menu;
+import Model.Avvio_Menu;
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Finestra_Menu f = new Finestra_Menu();
-		f.setVisible(true);
-		Controller_Menu m=new Controller_Menu(f);
+		Avvio_Menu m=new Avvio_Menu();
 	}
 
 }
