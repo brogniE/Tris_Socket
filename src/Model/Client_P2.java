@@ -11,24 +11,24 @@ import java.util.concurrent.Semaphore;
 import javax.swing.JOptionPane;
 
 import Control.Controller_Client;
-import View.Finestra_Client;
+import View.Finestra_Menu;
 
 public class Client_P2 implements Runnable, Player{
 	private String ipServer;
 	private Socket socket;
-	private Finestra_Client f;
+	private Finestra_Menu f;
 	private Tris tris;
 	private Semaphore s;
 	private Controller_Client ct;
-	
+
 	private String nome;
 	private String nomeAvversario;
 	private int turni;
-	
+
 	private int vittorieP1=0;
 	private int vittorieP2=0;
-	
-	public Client_P2(Finestra_Client f, Semaphore s) {
+
+	public Client_P2(Finestra_Menu f, Semaphore s) {
 		super();
 		this.f=f;
 		ct = new Controller_Client(f, this);
@@ -102,51 +102,54 @@ public class Client_P2 implements Runnable, Player{
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub 
+		// TODO Auto-generated method stub
 		Casella c;
 		try {
 			socket =new Socket(ipServer, 9999);
-			
+
 			Pacchetto_Avvio pacchetto= new Pacchetto_Avvio(this.nome);
-			
+
 			try {
 				ObjectInputStream streamPacchettoIn = new ObjectInputStream(socket.getInputStream());
 				pacchetto= (Pacchetto_Avvio)streamPacchettoIn.readObject();
 				this.nomeAvversario=pacchetto.getNome();
 				this.turni=pacchetto.getTurni();
-				
+
 				pacchetto=new Pacchetto_Avvio(nome);
 				ObjectOutputStream streamPacchettoOut = new ObjectOutputStream(socket.getOutputStream());
 				streamPacchettoOut.writeObject(pacchetto);
-				
-				f.getLblTurniTotali().setText("Turni totali : "+turni);
+
+				f.getLblTurniTotaliClient().setText("Turni totali : "+turni);
 				ct.aggiornaLbl();
-				
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				this.erroreConnessione();
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			s.release();
-	
+
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
+			this.erroreConnessione();
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
+			this.erroreConnessione();
 			System.out.println(e1.getMessage());
 		}
 	}
-	
+
 	public void inviaCasella(Casella c) {
-		InviaPacchetto i= new InviaPacchetto(c, socket, s);
+		InviaPacchetto i= new InviaPacchetto(c, socket, s, this);
 		Thread t= new Thread(i);
 		t.start();
 	}
-	
+
 	public void riceviCasella() {
 		try {
 			s.acquire();
@@ -158,7 +161,7 @@ public class Client_P2 implements Runnable, Player{
 		Thread t= new Thread(r);
 		t.start();
 	}
-	
+
 	public void chiudiConnessione() {
 		try {
 			socket.close();
@@ -167,18 +170,18 @@ public class Client_P2 implements Runnable, Player{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void risposta(Casella c) {
 		this.tris.addSegno(1, c);
 		int v=tris.ControllaVincitore();
 		if(v==0)
-			f.attivaCaselle(this.tris);
+			f.attivaCaselleClient(this.tris);
 		else
 			terminaPartita(v);
 	}
-	
+
 	public void terminaPartita(int v) {
-		
+
 		if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
 			vittorieP2++;
@@ -189,18 +192,26 @@ public class Client_P2 implements Runnable, Player{
 			JOptionPane.showMessageDialog(f, "HAI PAREGGIATO");
 		}
 		if(turni==1) {
-			f.setVisible(false);
-			Avvio_Menu m= new Avvio_Menu();
+			f.getPanelClientPlay().setVisible(false);
+			f.getPanelMenu().setVisible(true);
 			chiudiConnessione();
-			f.attivaCaselle(this.tris);
+			f.attivaCaselleClient(this.tris);
 		}else {
 			turni--;
-			f.resettaCelle();
+			f.resettaCelleClient();
 			tris.azzera();
-			f.attivaCaselle(this.tris);
+			f.attivaCaselleClient(this.tris);
 		}
 		ct.aggiornaLbl();
-		
+
+	}
+	
+	public void erroreConnessione() {
+		JOptionPane.showMessageDialog(f, "Errore di connessione");
+		f.getPanelMenu().setVisible(true);
+		f.getPanelServerPlay().setVisible(false);
+		f.getPanelServerWait().setVisible(false);
+		f.getPanelStartServer().setVisible(false);
 	}
 
 }
