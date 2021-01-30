@@ -43,6 +43,7 @@ public class RiceviPacchetto implements Runnable{
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			c.erroreConnessione();
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
