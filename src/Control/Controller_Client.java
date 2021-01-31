@@ -20,9 +20,11 @@ public class Controller_Client implements ActionListener{
 	private Finestra_Menu f;
 	private Client_P2 c;
 	private ImageIcon imgcroce= new ImageIcon("src/img/croce.png");
+	private Controller_Menu ctm;
 
-	public Controller_Client(Finestra_Menu f, Client_P2 c) {
+	public Controller_Client(Finestra_Menu f, Client_P2 c, Controller_Menu ctm) {
 		super();
+		this.ctm=ctm;
 		this.f = f;
 		this.c = c;
 		f.getBtnGioca().addActionListener(this);
@@ -36,6 +38,22 @@ public class Controller_Client implements ActionListener{
 		f.getButton_7Client().addActionListener(this);
 		f.getButton_8Client().addActionListener(this);
 		f.getBtnIndietro3().addActionListener(this);
+	}
+	
+	public Controller_Menu getCtm() {
+		return ctm;
+	}
+
+	public void setCtm(Controller_Menu ctm) {
+		this.ctm = ctm;
+	}
+
+	public Client_P2 getC() {
+		return c;
+	}
+
+	public void setC(Client_P2 c) {
+		this.c = c;
 	}
 
 	@Override
@@ -128,6 +146,7 @@ public void terminaPartita(int v) {
 		if(c.getTurni()==1) {
 			f.getPanelClientPlay().setVisible(false);
 			f.getPanelMenu().setVisible(true);
+			ctm.setCtc(this);
 			c.chiudiConnessione();
 		}else {
 			c.setTurni(c.getTurni()-1);

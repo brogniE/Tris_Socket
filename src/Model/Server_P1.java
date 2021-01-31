@@ -9,6 +9,7 @@ import java.util.concurrent.Semaphore;
 
 import javax.swing.JOptionPane;
 
+import Control.Controller_Menu;
 import Control.Controller_Server;
 import View.Finestra_Menu;
 
@@ -27,13 +28,25 @@ public class Server_P1 implements Runnable, Player{
 	private int vittorieP1=0;
 	private int vittorieP2=0;
 
-	public Server_P1(Finestra_Menu f, Semaphore s) {
+	public Server_P1(Finestra_Menu f, Semaphore s, Controller_Menu ctm) {
 		super();
 		this.f=f;
 		tris=new Tris();
 		this.s=s;
 		this.turni = 0;
-		ct=new Controller_Server(f, this);
+		ct=new Controller_Server(f, this, ctm);
+		ct.getCtm().setCts(ct);
+		ct.AvvioPartita();
+	}
+	
+	public Server_P1(Finestra_Menu f, Semaphore s, Controller_Server ct) {
+		super();
+		this.f=f;
+		tris=new Tris();
+		this.s=s;
+		this.turni = 0;
+		this.ct=ct;
+		ct.setS(this);
 		ct.AvvioPartita();
 	}
 
@@ -127,8 +140,8 @@ public class Server_P1 implements Runnable, Player{
 
 	public void chiudiConnessione() {
 		try {
-			serverSocket.close();
 			socket.close();
+			serverSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,14 +193,13 @@ public class Server_P1 implements Runnable, Player{
 			f.getPanelServerPlay().setVisible(false);
 			f.getPanelMenu().setVisible(true);
 			chiudiConnessione();
-			f.attivaCaselleServer(this.tris);
 		}else {
 			turni--;
 			f.resettaCelleServer();
 			tris.azzera();
 			f.attivaCaselleServer(this.tris);
+			ct.aggiornaLbl();
 		}
-		ct.aggiornaLbl();
 
 	}
 	

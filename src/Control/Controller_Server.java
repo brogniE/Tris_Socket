@@ -21,9 +21,11 @@ public class Controller_Server implements ActionListener{
 	private Finestra_Menu f;
 	private Server_P1 s;
 	private ImageIcon imgcerchio= new ImageIcon("src/img/cerchio.png");
+	private Controller_Menu ctm;
 
-	public Controller_Server(Finestra_Menu f, Server_P1 s) {
+	public Controller_Server(Finestra_Menu f, Server_P1 s, Controller_Menu ctm) {
 		super();
+		this.ctm=ctm;
 		this.f = f;
 		this.s = s;
 		f.getButtonServer().addActionListener(this);
@@ -40,6 +42,24 @@ public class Controller_Server implements ActionListener{
 		
 		f.getBtnIndietro1().addActionListener(this);
 	}
+	
+
+	public Controller_Menu getCtm() {
+		return ctm;
+	}
+
+	public void setCtm(Controller_Menu ctm) {
+		this.ctm = ctm;
+	}
+
+	public Server_P1 getS() {
+		return s;
+	}
+
+	public void setS(Server_P1 s) {
+		this.s = s;
+	}
+
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -124,6 +144,8 @@ public class Controller_Server implements ActionListener{
 		f.getPanelStartServer().setVisible(false);
 		f.getLblTurniTotaliServer().setText("Turni totali : "+s.getTurni());
 		aggiornaLbl();
+		f.resettaCelleServer();
+		f.attivaCaselleServer(s.getTris());
 	}
 
 
@@ -154,7 +176,9 @@ public class Controller_Server implements ActionListener{
 		if(s.getTurni()==1) {
 			f.getPanelServerPlay().setVisible(false);
 			f.getPanelMenu().setVisible(true);
+			ctm.setCts(this);
 			s.chiudiConnessione();
+			
 		}else {
 			s.setTurni(s.getTurni()-1);
 			f.resettaCelleServer();

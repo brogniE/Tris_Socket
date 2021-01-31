@@ -11,6 +11,7 @@ import java.util.concurrent.Semaphore;
 import javax.swing.JOptionPane;
 
 import Control.Controller_Client;
+import Control.Controller_Menu;
 import View.Finestra_Menu;
 
 public class Client_P2 implements Runnable, Player{
@@ -28,10 +29,22 @@ public class Client_P2 implements Runnable, Player{
 	private int vittorieP1=0;
 	private int vittorieP2=0;
 
-	public Client_P2(Finestra_Menu f, Semaphore s) {
+	public Client_P2(Finestra_Menu f, Semaphore s, Controller_Menu ctm) {
 		super();
 		this.f=f;
-		ct = new Controller_Client(f, this);
+		ct = new Controller_Client(f, this, ctm);
+		ct.getCtm().setCtc(ct);
+		tris=new Tris();
+		this.s=s;
+	}
+	
+	public Client_P2(Finestra_Menu f, Semaphore s, Controller_Client ct) {
+		super();
+		this.f=f;
+		System.out.println("pre"+this.ct);
+		this.ct = ct;
+		ct.setC(this);
+		System.out.println("post"+this.ct);
 		tris=new Tris();
 		this.s=s;
 	}
@@ -118,7 +131,9 @@ public class Client_P2 implements Runnable, Player{
 				streamPacchettoOut.writeObject(pacchetto);
 
 				f.getLblTurniTotaliClient().setText("Turni totali : "+turni);
+				System.out.println("run: "+ct);
 				ct.aggiornaLbl();
+				f.resettaCelleClient();
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -163,6 +178,7 @@ public class Client_P2 implements Runnable, Player{
 	public void chiudiConnessione() {
 		try {
 			socket.close();
+			ct=null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -199,8 +215,8 @@ public class Client_P2 implements Runnable, Player{
 			f.resettaCelleClient();
 			tris.azzera();
 			f.attivaCaselleClient(this.tris);
+			ct.aggiornaLbl();
 		}
-		ct.aggiornaLbl();
 
 	}
 	
