@@ -38,8 +38,10 @@ public class Controller_Client implements ActionListener{
 		f.getButton_7Client().addActionListener(this);
 		f.getButton_8Client().addActionListener(this);
 		f.getBtnIndietro3().addActionListener(this);
+		f.getBtnOkServer().addActionListener(this);
+		f.getBtnOkClient().addActionListener(this);
 	}
-	
+
 	public Controller_Menu getCtm() {
 		return ctm;
 	}
@@ -81,41 +83,56 @@ public class Controller_Client implements ActionListener{
 			casella=new Casella(0, 0);
 			this.avvioCasella(f.getButtonClient(), casella);
 		}
+
 		if(e.getSource()==f.getButton_1Client()) {
 			casella=new Casella(1, 0);
 			this.avvioCasella(f.getButton_1Client(), casella);
 		}
+
 		if(e.getSource()==f.getButton_2Client()) {
 			casella=new Casella(2, 0);
 			this.avvioCasella(f.getButton_2Client(), casella);
 		}
+
 		if(e.getSource()==f.getButton_3Client()) {
 			casella=new Casella(0, 1);
 			this.avvioCasella(f.getButton_3Client(), casella);
 		}
+
 		if(e.getSource()==f.getButton_4Client()) {
 			casella=new Casella(1, 1);
 			this.avvioCasella(f.getButton_4Client(), casella);
 		}
+
 		if(e.getSource()==f.getButton_5Client()) {
 			casella=new Casella(2, 1);
 			this.avvioCasella(f.getButton_5Client(), casella);
 		}
+
 		if(e.getSource()==f.getButton_6Client()) {
 			casella=new Casella(0, 2);
 			this.avvioCasella(f.getButton_6Client(), casella);
 		}
+
 		if(e.getSource()==f.getButton_7Client()) {
 			casella=new Casella(1, 2);
 			this.avvioCasella(f.getButton_7Client(), casella);
 		}
+
 		if(e.getSource()==f.getButton_8Client()) {
 			casella=new Casella(2, 2);
 			this.avvioCasella(f.getButton_8Client(), casella);
 		}
+
 		if(e.getSource()==f.getBtnIndietro3()) {
 			f.getPanelClientJoin().setVisible(false);
 			f.getPanelMenu().setVisible(true);
+		}
+
+		if(e.getSource()==f.getBtnOkClient()) {
+			f.getPanelResultClient().setVisible(false);
+			f.getPanelMenu().setVisible(true);
+
 		}
 	}
 
@@ -145,9 +162,18 @@ public void terminaPartita(int v) {
 		aggiornaLbl();
 		if(c.getTurni()==1) {
 			f.getPanelClientPlay().setVisible(false);
-			f.getPanelMenu().setVisible(true);
+			f.getPanelResultClient().setVisible(true);
+
+			if(c.getVittorieP1()>c.getVittorieP2()) {
+				f.getLabelResultClient().setText("HAI PERSO!");
+			} else if(c.getVittorieP2()>c.getVittorieP1()) {
+				f.getLabelResultClient().setText("HAI VINTO!");
+			} else if(c.getVittorieP1()==c.getVittorieP2()) {
+				f.getLabelResultClient().setText("PAREGGIO!");
+			}
 			ctm.setCtc(this);
 			c.chiudiConnessione();
+
 		}else {
 			c.setTurni(c.getTurni()-1);
 			f.resettaCelleClient();

@@ -38,7 +38,7 @@ public class Server_P1 implements Runnable, Player{
 		ct.getCtm().setCts(ct);
 		ct.AvvioPartita();
 	}
-	
+
 	public Server_P1(Finestra_Menu f, Semaphore s, Controller_Server ct) {
 		super();
 		this.f=f;
@@ -191,7 +191,16 @@ public class Server_P1 implements Runnable, Player{
 		}
 		if(turni==1) {
 			f.getPanelServerPlay().setVisible(false);
-			f.getPanelMenu().setVisible(true);
+			f.getPanelResultServer().setVisible(true);
+
+			if(vittorieP1>vittorieP2) {
+				f.getLabelResultServer().setText("HAI VINTO!");
+			} else if(vittorieP1<vittorieP2) {
+				f.getLabelResultServer().setText("HAI PERSO!");
+			} else if(vittorieP1==vittorieP2) {
+				f.getLabelResultServer().setText("PAREGGIO!");
+			}
+
 			chiudiConnessione();
 		}else {
 			turni--;
@@ -202,7 +211,7 @@ public class Server_P1 implements Runnable, Player{
 		}
 
 	}
-	
+
 	public void erroreConnessione() {
 		s.release();
 		chiudiConnessione();

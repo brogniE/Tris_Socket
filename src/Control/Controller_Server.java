@@ -37,12 +37,12 @@ public class Controller_Server implements ActionListener{
 		f.getButton_6Server().addActionListener(this);
 		f.getButton_7Server().addActionListener(this);
 		f.getButton_8Server().addActionListener(this);
-
 		f.getBtnAvviaTris().addActionListener(this);
-		
 		f.getBtnIndietro1().addActionListener(this);
+		f.getBtnOkServer().addActionListener(this);
+		f.getBtnOkClient().addActionListener(this);
 	}
-	
+
 
 	public Controller_Menu getCtm() {
 		return ctm;
@@ -68,39 +68,47 @@ public class Controller_Server implements ActionListener{
 			casella=new Casella(0, 0);
 			this.avvioCasella(f.getButtonServer(), casella);
 		}
+
 		if(e.getSource()==f.getButton_1Server()) {
 			casella=new Casella(1, 0);
 			this.avvioCasella(f.getButton_1Server(), casella);
 		}
+
 		if(e.getSource()==f.getButton_2Server()) {
 			casella=new Casella(2, 0);
 			this.avvioCasella(f.getButton_2Server(), casella);
 		}
+
 		if(e.getSource()==f.getButton_3Server()) {
 			casella=new Casella(0, 1);
 			this.avvioCasella(f.getButton_3Server(), casella);
 		}
+
 		if(e.getSource()==f.getButton_4Server()) {
 			casella=new Casella(1, 1);
 			this.avvioCasella(f.getButton_4Server(), casella);
 		}
+
 		if(e.getSource()==f.getButton_5Server()) {
 			casella=new Casella(2, 1);
 			this.avvioCasella(f.getButton_5Server(), casella);
 		}
+
 		if(e.getSource()==f.getButton_6Server()) {
 			casella=new Casella(0, 2);
 			this.avvioCasella(f.getButton_6Server(), casella);
 		}
+
 		if(e.getSource()==f.getButton_7Server()) {
 			casella=new Casella(1, 2);
 			this.avvioCasella(f.getButton_7Server(), casella);
 		}
+
 		if(e.getSource()==f.getButton_8Server()) {
 			casella=new Casella(2, 2);
 			this.avvioCasella(f.getButton_8Server(), casella);
 		}
-		
+
 		if(e.getSource()==f.getBtnIndietro1()) {
 			f.getPanelStartServer().setVisible(false);
 			f.getPanelMenu().setVisible(true);
@@ -126,6 +134,13 @@ public class Controller_Server implements ActionListener{
 				Thread t = new Thread(s);
 				t.start();
 			}
+		}
+
+		if(e.getSource()==f.getBtnOkServer()) {
+			f.getPanelResultServer().setVisible(false);
+			f.getPanelMenu().setVisible(true);
+			ctm.setCts(this);
+			s.chiudiConnessione();
 		}
 
 	}
@@ -175,10 +190,16 @@ public class Controller_Server implements ActionListener{
 		}
 		if(s.getTurni()==1) {
 			f.getPanelServerPlay().setVisible(false);
-			f.getPanelMenu().setVisible(true);
-			ctm.setCts(this);
-			s.chiudiConnessione();
-			
+			f.getPanelResultServer().setVisible(true);
+
+			if(s.getVittorieP1()>s.getVittorieP2()) {
+				f.getLabelResultServer().setText("HAI VINTO!");
+			} else if(s.getVittorieP2()>s.getVittorieP1()) {
+				f.getLabelResultServer().setText("HAI PERSO!");
+			} else if(s.getVittorieP1()==s.getVittorieP2()) {
+				f.getLabelResultServer().setText("PAREGGIO!");
+			}
+
 		}else {
 			s.setTurni(s.getTurni()-1);
 			f.resettaCelleServer();
@@ -194,5 +215,5 @@ public class Controller_Server implements ActionListener{
 		f.getLblVittorieP1Server().setText("Vittorie "+s.getNome()+" : "+s.getVittorieP1());
 		f.getLblVittorieP2Server().setText("Vittorie "+s.getNomeAvversario()+" : "+s.getVittorieP2());
 	}
-	
+
 }

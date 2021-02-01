@@ -79,7 +79,6 @@ public class Finestra_Menu extends JFrame {
 	private JLabel lblTurniRimanentiClient;
 	private JPanel panelMenu;
 	private JPanel panelClientJoin;
-	private JLabel lblIlNostroTris_1;
 	private JTextField textField_1;
 	private JLabel lblIpConcorrente;
 	private JButton btnGioca;
@@ -89,6 +88,12 @@ public class Finestra_Menu extends JFrame {
 	private JButton btnIndietro1;
 	private JButton btnIndietro3;
 	private JButton btnImpostazioni;
+	private JPanel panelResultServer;
+	private JLabel labelResultServer;
+	private JButton btnOkServer;
+	private JPanel panelResultClient;
+	private JLabel labelResultClient;
+	private JButton btnOkClient;
 
 	public Finestra_Menu(int n) {
 		if(n==0) {
@@ -113,250 +118,278 @@ public class Finestra_Menu extends JFrame {
 		contentPaneMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPaneMenu);
 		contentPaneMenu.setLayout(null);
-														
-																panelMenu = new JPanel();
-																panelMenu.setBounds(0, 0, 434, 260);
-																contentPaneMenu.add(panelMenu);
-																panelMenu.setLayout(null);
-																
-																		lblTris = new JLabel("TRIS");
-																		lblTris.setFont(new Font("Tahoma", Font.BOLD, 23));
-																		lblTris.setBounds(176, 37, 68, 28);
-																		panelMenu.add(lblTris);
-																		
-																				lblScegliereLopzione = new JLabel("Scegliere l'opzione");
-																				lblScegliereLopzione.setBounds(151, 103, 129, 14);
-																				panelMenu.add(lblScegliereLopzione);
-																				
-																						btnNewButton = new JButton("CREA GIOCO");
-																						btnNewButton.addActionListener(new ActionListener() {
-																							public void actionPerformed(ActionEvent e) {
-																							}
-																						});
-																						btnNewButton.setBounds(127, 139, 153, 28);
-																						panelMenu.add(btnNewButton);
-																						
-																								btnNewButton_1 = new JButton("UNISCITI AL GIOCO");
-																								btnNewButton_1.setBounds(127, 183, 153, 28);
-																								panelMenu.add(btnNewButton_1);
-																								
-																								btnImpostazioni = new JButton("");
-																								btnImpostazioni.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/luna.png")));
-																								btnImpostazioni.setBounds(404, 0, 30, 30);
-																								panelMenu.add(btnImpostazioni);
-																								
-																										panelMenu.setVisible(true);
-												
-														panelServerWait = new JPanel();
-														panelServerWait.setLayout(null);
-														panelServerWait.setBounds(0, 0, 416, 243);
-														contentPaneMenu.add(panelServerWait);
-														
-																lblIlNostroTris = new JLabel("Indirizzo stanza tris");
-																lblIlNostroTris.setBounds(91, 34, 142, 13);
-																panelServerWait.add(lblIlNostroTris);
-																
-																		lblAttendiIlSecondo = new JLabel("Attendi il giocatore avversario ...");
-																		lblAttendiIlSecondo.setBounds(91, 156, 252, 13);
-																		panelServerWait.add(lblAttendiIlSecondo);
-																		
-																				lblLocalhost = new JLabel("");
-																				lblLocalhost.setFont(new Font("Tahoma", Font.BOLD, 10));
-																				lblLocalhost.setBounds(91, 57, 122, 13);
-																				panelServerWait.add(lblLocalhost);
-																				
-																						panelServerWait.setVisible(false);
-										
-												panelClientJoin = new JPanel();
-												panelClientJoin.setLayout(null);
-												panelClientJoin.setBounds(0, 0, 412, 253);
-												contentPaneMenu.add(panelClientJoin);
-												
-														lblIlNostroTris_1 = new JLabel("Il nostro Tris");
-														lblIlNostroTris_1.setBounds(126, 26, 58, 13);
-														panelClientJoin.add(lblIlNostroTris_1);
-														
-																textField_1 = new JTextField();
-																textField_1.setColumns(10);
-																textField_1.setBounds(149, 80, 96, 19);
-																panelClientJoin.add(textField_1);
-																
-																		lblIpConcorrente = new JLabel("Indirizzo stanza");
-																		lblIpConcorrente.setBounds(23, 83, 96, 13);
-																		panelClientJoin.add(lblIpConcorrente);
-																		
-																				btnGioca = new JButton("Gioca");
-																				btnGioca.setBounds(127, 149, 103, 59);
-																				panelClientJoin.add(btnGioca);
-																				
-																						lblNome_1 = new JLabel("Nome ");
-																						lblNome_1.setBounds(23, 49, 112, 13);
-																						panelClientJoin.add(lblNome_1);
-																						
-																								textField_2 = new JTextField();
-																								textField_2.setColumns(10);
-																								textField_2.setBounds(149, 49, 96, 19);
-																								panelClientJoin.add(textField_2);
-																								
-																								btnIndietro3 = new JButton("");
-																								btnIndietro3.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/indietro.png")));
-																								btnIndietro3.setBounds(0, 0, 39, 32);
-																								panelClientJoin.add(btnIndietro3);
-																								
-																										panelClientJoin.setVisible(false);
-		
-				panelStartServer = new JPanel();
-				panelStartServer.setLayout(null);
-				panelStartServer.setBounds(0, 0, 416, 253);
-				contentPaneMenu.add(panelStartServer);
-				
-						textField = new JTextField();
-						textField.setColumns(10);
-						textField.setBounds(137, 43, 96, 19);
-						panelStartServer.add(textField);
-						
-								lblNome = new JLabel("Nome");
-								lblNome.setBounds(44, 46, 45, 13);
-								panelStartServer.add(lblNome);
-								
-										lblTurni = new JLabel("Turni");
-										lblTurni.setBounds(44, 103, 45, 13);
-										panelStartServer.add(lblTurni);
-										
-												comboBox = new JComboBox();
-												comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
-												comboBox.setBounds(122, 99, 53, 21);
-												panelStartServer.add(comboBox);
-												
-														btnAvviaTris = new JButton("Avvia Tris");
-														btnAvviaTris.setFont(new Font("Tahoma", Font.PLAIN, 13));
-														btnAvviaTris.setBounds(90, 165, 113, 32);
-														panelStartServer.add(btnAvviaTris);
-														
-														btnIndietro1 = new JButton("");
-														btnIndietro1.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/indietro.png")));
-														btnIndietro1.setBounds(0, 0, 39, 32);
-														panelStartServer.add(btnIndietro1);
-														
-																panelStartServer.setVisible(false);
-				
-						panelServerPlay = new JPanel();
-						panelServerPlay.setLayout(null);
-						panelServerPlay.setBounds(0, 0, 416, 243);
-						contentPaneMenu.add(panelServerPlay);
-						
-								buttonServer = new JButton("");
-								buttonServer.setBounds(61, 43, 56, 56);
-								panelServerPlay.add(buttonServer);
-								
-										button_1Server = new JButton("");
-										button_1Server.setBounds(117, 43, 56, 56);
-										panelServerPlay.add(button_1Server);
-										
-												button_2Server = new JButton("");
-												button_2Server.setBounds(173, 43, 56, 56);
-												panelServerPlay.add(button_2Server);
-												
-														button_3Server = new JButton("");
-														button_3Server.setBounds(61, 99, 56, 56);
-														panelServerPlay.add(button_3Server);
-														
-																button_4Server = new JButton("");
-																button_4Server.setBounds(117, 99, 56, 56);
-																panelServerPlay.add(button_4Server);
-																
-																		button_5Server = new JButton("");
-																		button_5Server.setBounds(173, 99, 56, 56);
-																		panelServerPlay.add(button_5Server);
-																		
-																				button_6Server = new JButton("");
-																				button_6Server.setBounds(61, 155, 56, 56);
-																				panelServerPlay.add(button_6Server);
-																				
-																						button_7Server = new JButton("");
-																						button_7Server.setBounds(117, 155, 56, 56);
-																						panelServerPlay.add(button_7Server);
-																						
-																								button_8Server = new JButton("");
-																								button_8Server.setBounds(173, 155, 56, 56);
-																								panelServerPlay.add(button_8Server);
-																								
-																										lblVittorieP1Server = new JLabel("");
-																										lblVittorieP1Server.setBounds(282, 102, 124, 13);
-																										panelServerPlay.add(lblVittorieP1Server);
-																										
-																												lblVittorieP2Server = new JLabel("");
-																												lblVittorieP2Server.setBounds(282, 125, 124, 13);
-																												panelServerPlay.add(lblVittorieP2Server);
-																												
-																														lblTurniTotaliServer = new JLabel("");
-																														lblTurniTotaliServer.setBounds(282, 25, 124, 13);
-																														panelServerPlay.add(lblTurniTotaliServer);
-																														
-																																lblTurniRimanentiServer = new JLabel("");
-																																lblTurniRimanentiServer.setBounds(282, 43, 124, 13);
-																																panelServerPlay.add(lblTurniRimanentiServer);
-																																
-																																		panelServerPlay.setVisible(false);
-		
-				panelClientPlay = new JPanel();
-				panelClientPlay.setBounds(0, 0, 434, 260);
-				contentPaneMenu.add(panelClientPlay);
-				panelClientPlay.setLayout(null);
-				
-						buttonClient = new JButton("");
-						buttonClient.setBounds(61, 43, 56, 56);
-						panelClientPlay.add(buttonClient);
-						
-								button_1Client = new JButton("");
-								button_1Client.setBounds(117, 43, 56, 56);
-								panelClientPlay.add(button_1Client);
-								
-										button_2Client = new JButton("");
-										button_2Client.setBounds(173, 43, 56, 56);
-										panelClientPlay.add(button_2Client);
-										
-												button_3Client = new JButton("");
-												button_3Client.setBounds(61, 99, 56, 56);
-												panelClientPlay.add(button_3Client);
-												
-														button_4Client = new JButton("");
-														button_4Client.setBounds(117, 99, 56, 56);
-														panelClientPlay.add(button_4Client);
-														
-																button_5Client = new JButton("");
-																button_5Client.setBounds(173, 99, 56, 56);
-																panelClientPlay.add(button_5Client);
-																
-																		button_6Client = new JButton("");
-																		button_6Client.setBounds(61, 155, 56, 56);
-																		panelClientPlay.add(button_6Client);
-																		
-																				button_7Client = new JButton("");
-																				button_7Client.setBounds(117, 155, 56, 56);
-																				panelClientPlay.add(button_7Client);
-																				
-																						button_8Client = new JButton("");
-																						button_8Client.setBounds(173, 155, 56, 56);
-																						panelClientPlay.add(button_8Client);
-																						
-																								lblVittorieP1Client = new JLabel("");
-																								lblVittorieP1Client.setBounds(282, 102, 134, 13);
-																								panelClientPlay.add(lblVittorieP1Client);
-																								
-																										lblVittorieP2Client = new JLabel("");
-																										lblVittorieP2Client.setBounds(282, 125, 134, 13);
-																										panelClientPlay.add(lblVittorieP2Client);
-																										
-																												lblTurniTotaliClient = new JLabel("Turni totali");
-																												lblTurniTotaliClient.setBounds(282, 25, 134, 13);
-																												panelClientPlay.add(lblTurniTotaliClient);
-																												
-																														lblTurniRimanentiClient = new JLabel("Turni rimanenti");
-																														lblTurniRimanentiClient.setBounds(282, 43, 134, 13);
-																														panelClientPlay.add(lblTurniRimanentiClient);
-																														
-																																panelClientPlay.setVisible(false);
+
+		panelMenu = new JPanel();
+		panelMenu.setBounds(0, 0, 434, 260);
+		contentPaneMenu.add(panelMenu);
+		panelMenu.setLayout(null);
+
+		lblTris = new JLabel("TRIS");
+		lblTris.setFont(new Font("Tahoma", Font.BOLD, 23));
+		lblTris.setBounds(176, 37, 68, 28);
+		panelMenu.add(lblTris);
+
+		lblScegliereLopzione = new JLabel("Scegliere l'opzione");
+		lblScegliereLopzione.setBounds(151, 103, 129, 14);
+		panelMenu.add(lblScegliereLopzione);
+
+		btnNewButton = new JButton("CREA GIOCO");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(127, 139, 153, 28);
+		panelMenu.add(btnNewButton);
+
+		btnNewButton_1 = new JButton("UNISCITI AL GIOCO");
+		btnNewButton_1.setBounds(127, 183, 153, 28);
+		panelMenu.add(btnNewButton_1);
+
+		btnImpostazioni = new JButton("");
+		btnImpostazioni.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/luna.png")));
+		btnImpostazioni.setBounds(404, 0, 30, 30);
+		panelMenu.add(btnImpostazioni);
+
+		panelMenu.setVisible(true);
+
+		panelServerWait = new JPanel();
+		panelServerWait.setLayout(null);
+		panelServerWait.setBounds(0, 0, 416, 243);
+		contentPaneMenu.add(panelServerWait);
+
+		lblIlNostroTris = new JLabel("Indirizzo stanza tris");
+		lblIlNostroTris.setBounds(91, 34, 142, 13);
+		panelServerWait.add(lblIlNostroTris);
+
+		lblAttendiIlSecondo = new JLabel("Attendi il giocatore avversario ...");
+		lblAttendiIlSecondo.setBounds(91, 156, 252, 13);
+		panelServerWait.add(lblAttendiIlSecondo);
+
+		lblLocalhost = new JLabel("");
+		lblLocalhost.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblLocalhost.setBounds(91, 57, 122, 13);
+		panelServerWait.add(lblLocalhost);
+
+		panelServerWait.setVisible(false);
+
+		panelClientJoin = new JPanel();
+		panelClientJoin.setLayout(null);
+		panelClientJoin.setBounds(0, 0, 412, 253);
+		contentPaneMenu.add(panelClientJoin);
+
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(149, 80, 96, 25);
+		panelClientJoin.add(textField_1);
+
+		lblIpConcorrente = new JLabel("Indirizzo stanza");
+		lblIpConcorrente.setBounds(23, 90, 96, 13);
+		panelClientJoin.add(lblIpConcorrente);
+
+		btnGioca = new JButton("Gioca");
+		btnGioca.setBounds(127, 149, 103, 59);
+		panelClientJoin.add(btnGioca);
+
+		lblNome_1 = new JLabel("Nome ");
+		lblNome_1.setBounds(23, 55, 112, 13);
+		panelClientJoin.add(lblNome_1);
+
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(149, 49, 96, 25);
+		panelClientJoin.add(textField_2);
+
+		btnIndietro3 = new JButton("");
+		btnIndietro3.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/indietro.png")));
+		btnIndietro3.setBounds(0, 0, 39, 32);
+		panelClientJoin.add(btnIndietro3);
+
+		panelClientJoin.setVisible(false);
+
+		panelStartServer = new JPanel();
+		panelStartServer.setLayout(null);
+		panelStartServer.setBounds(0, 0, 416, 253);
+		contentPaneMenu.add(panelStartServer);
+
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(137, 43, 96, 25);
+		panelStartServer.add(textField);
+
+		lblNome = new JLabel("Nome");
+		lblNome.setBounds(44, 46, 45, 13);
+		panelStartServer.add(lblNome);
+
+		lblTurni = new JLabel("Turni");
+		lblTurni.setBounds(44, 103, 45, 13);
+		panelStartServer.add(lblTurni);
+
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+		comboBox.setBounds(122, 99, 53, 21);
+		panelStartServer.add(comboBox);
+
+		btnAvviaTris = new JButton("Avvia Tris");
+		btnAvviaTris.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnAvviaTris.setBounds(90, 165, 113, 32);
+		panelStartServer.add(btnAvviaTris);
+
+		btnIndietro1 = new JButton("");
+		btnIndietro1.setIcon(new ImageIcon(Finestra_Menu.class.getResource("/img/indietro.png")));
+		btnIndietro1.setBounds(0, 0, 39, 32);
+		panelStartServer.add(btnIndietro1);
+
+		panelStartServer.setVisible(false);
+
+		panelServerPlay = new JPanel();
+		panelServerPlay.setLayout(null);
+		panelServerPlay.setBounds(0, 0, 416, 243);
+		contentPaneMenu.add(panelServerPlay);
+
+		buttonServer = new JButton("");
+		buttonServer.setBounds(61, 43, 56, 56);
+		panelServerPlay.add(buttonServer);
+
+		button_1Server = new JButton("");
+		button_1Server.setBounds(117, 43, 56, 56);
+		panelServerPlay.add(button_1Server);
+
+		button_2Server = new JButton("");
+		button_2Server.setBounds(173, 43, 56, 56);
+		panelServerPlay.add(button_2Server);
+
+		button_3Server = new JButton("");
+		button_3Server.setBounds(61, 99, 56, 56);
+		panelServerPlay.add(button_3Server);
+
+		button_4Server = new JButton("");
+		button_4Server.setBounds(117, 99, 56, 56);
+		panelServerPlay.add(button_4Server);
+
+		button_5Server = new JButton("");
+		button_5Server.setBounds(173, 99, 56, 56);
+		panelServerPlay.add(button_5Server);
+
+		button_6Server = new JButton("");
+		button_6Server.setBounds(61, 155, 56, 56);
+		panelServerPlay.add(button_6Server);
+
+		button_7Server = new JButton("");
+		button_7Server.setBounds(117, 155, 56, 56);
+		panelServerPlay.add(button_7Server);
+
+		button_8Server = new JButton("");
+		button_8Server.setBounds(173, 155, 56, 56);
+		panelServerPlay.add(button_8Server);
+
+		lblVittorieP1Server = new JLabel("");
+		lblVittorieP1Server.setBounds(282, 102, 124, 13);
+		panelServerPlay.add(lblVittorieP1Server);
+
+		lblVittorieP2Server = new JLabel("");
+		lblVittorieP2Server.setBounds(282, 125, 124, 13);
+		panelServerPlay.add(lblVittorieP2Server);
+
+		lblTurniTotaliServer = new JLabel("");
+		lblTurniTotaliServer.setBounds(282, 25, 124, 13);
+		panelServerPlay.add(lblTurniTotaliServer);
+
+		lblTurniRimanentiServer = new JLabel("");
+		lblTurniRimanentiServer.setBounds(282, 43, 124, 13);
+		panelServerPlay.add(lblTurniRimanentiServer);
+
+		panelServerPlay.setVisible(false);
+
+		panelClientPlay = new JPanel();
+		panelClientPlay.setBounds(0, 0, 434, 260);
+		contentPaneMenu.add(panelClientPlay);
+		panelClientPlay.setLayout(null);
+
+		buttonClient = new JButton("");
+		buttonClient.setBounds(61, 43, 56, 56);
+		panelClientPlay.add(buttonClient);
+
+		button_1Client = new JButton("");
+		button_1Client.setBounds(117, 43, 56, 56);
+		panelClientPlay.add(button_1Client);
+
+		button_2Client = new JButton("");
+		button_2Client.setBounds(173, 43, 56, 56);
+		panelClientPlay.add(button_2Client);
+
+		button_3Client = new JButton("");
+		button_3Client.setBounds(61, 99, 56, 56);
+		panelClientPlay.add(button_3Client);
+
+		button_4Client = new JButton("");
+		button_4Client.setBounds(117, 99, 56, 56);
+		panelClientPlay.add(button_4Client);
+
+		button_5Client = new JButton("");
+		button_5Client.setBounds(173, 99, 56, 56);
+		panelClientPlay.add(button_5Client);
+
+		button_6Client = new JButton("");
+		button_6Client.setBounds(61, 155, 56, 56);
+		panelClientPlay.add(button_6Client);
+
+		button_7Client = new JButton("");
+		button_7Client.setBounds(117, 155, 56, 56);
+		panelClientPlay.add(button_7Client);
+
+		button_8Client = new JButton("");
+		button_8Client.setBounds(173, 155, 56, 56);
+		panelClientPlay.add(button_8Client);
+
+		lblVittorieP1Client = new JLabel("");
+		lblVittorieP1Client.setBounds(282, 102, 134, 13);
+		panelClientPlay.add(lblVittorieP1Client);
+
+		lblVittorieP2Client = new JLabel("");
+		lblVittorieP2Client.setBounds(282, 125, 134, 13);
+		panelClientPlay.add(lblVittorieP2Client);
+
+		lblTurniTotaliClient = new JLabel("Turni totali");
+		lblTurniTotaliClient.setBounds(282, 25, 134, 13);
+		panelClientPlay.add(lblTurniTotaliClient);
+
+		lblTurniRimanentiClient = new JLabel("Turni rimanenti");
+		lblTurniRimanentiClient.setBounds(282, 43, 134, 13);
+		panelClientPlay.add(lblTurniRimanentiClient);
+
+		panelClientPlay.setVisible(false);
+
+		panelResultServer = new JPanel();
+		panelResultServer.setLayout(null);
+		panelResultServer.setBounds(0, 0, 416, 243);
+		contentPaneMenu.add(panelResultServer);
+
+		labelResultServer = new JLabel("");
+		labelResultServer.setFont(new Font("Tahoma", Font.BOLD, 26));
+		labelResultServer.setBounds(125, 55, 217, 50);
+		panelResultServer.add(labelResultServer);
+
+		btnOkServer = new JButton("OK");
+		btnOkServer.setBounds(165, 177, 85, 21);
+		panelResultServer.add(btnOkServer);
+
+		panelResultServer.setVisible(false);
+
+		panelResultClient = new JPanel();
+		panelResultClient.setLayout(null);
+		panelResultClient.setBounds(0, 0, 416, 243);
+		contentPaneMenu.add(panelResultClient);
+
+		labelResultClient = new JLabel("");
+		labelResultClient.setFont(new Font("Tahoma", Font.BOLD, 26));
+		labelResultClient.setBounds(125, 55, 217, 50);
+		panelResultClient.add(labelResultClient);
+
+		btnOkClient = new JButton("OK");
+		btnOkClient.setBounds(165, 177, 85, 21);
+		panelResultClient.add(btnOkClient);
+
+		panelResultClient.setVisible(false);
 
 	}
 
@@ -713,7 +746,7 @@ public class Finestra_Menu extends JFrame {
 
 	public void setBtnIndietro3(JButton btnIndietro3) {
 		this.btnIndietro3 = btnIndietro3;
-	}	
+	}
 
 	public JButton getBtnImpostazioni() {
 		return btnImpostazioni;
@@ -722,6 +755,54 @@ public class Finestra_Menu extends JFrame {
 
 	public void setBtnImpostazioni(JButton btnImpostazioni) {
 		this.btnImpostazioni = btnImpostazioni;
+	}
+
+	public JPanel getPanelResultServer() {
+		return panelResultServer;
+	}
+
+	public void setPanelResultServer(JPanel panelResultServer) {
+		this.panelResultServer = panelResultServer;
+	}
+
+	public JLabel getLabelResultServer() {
+		return labelResultServer;
+	}
+
+	public void setLabelResultServer(JLabel labelResultServer) {
+		this.labelResultServer = labelResultServer;
+	}
+
+	public JButton getBtnOkServer() {
+		return btnOkServer;
+	}
+
+	public void setBtnOkServer(JButton btnOkServer) {
+		this.btnOkServer = btnOkServer;
+	}
+
+	public JPanel getPanelResultClient() {
+		return panelResultClient;
+	}
+
+	public void setPanelResultClient(JPanel panelResultClient) {
+		this.panelResultClient = panelResultClient;
+	}
+
+	public JLabel getLabelResultClient() {
+		return labelResultClient;
+	}
+
+	public void setLabelResultClient(JLabel labelResultClient) {
+		this.labelResultClient = labelResultClient;
+	}
+
+	public JButton getBtnOkClient() {
+		return btnOkClient;
+	}
+
+	public void setBtnOkClient(JButton btnOkClient) {
+		this.btnOkClient = btnOkClient;
 	}
 
 

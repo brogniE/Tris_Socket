@@ -37,7 +37,7 @@ public class Client_P2 implements Runnable, Player{
 		tris=new Tris();
 		this.s=s;
 	}
-	
+
 	public Client_P2(Finestra_Menu f, Semaphore s, Controller_Client ct) {
 		super();
 		this.f=f;
@@ -207,7 +207,16 @@ public class Client_P2 implements Runnable, Player{
 		}
 		if(turni==1) {
 			f.getPanelClientPlay().setVisible(false);
-			f.getPanelMenu().setVisible(true);
+			f.getPanelResultClient().setVisible(true);
+
+			if(vittorieP1>vittorieP2) {
+				f.getLabelResultClient().setText("HAI PERSO!");
+			} else if(vittorieP1<vittorieP2) {
+				f.getLabelResultClient().setText("HAI VINTO!");
+			} else if(vittorieP1==vittorieP2) {
+				f.getLabelResultClient().setText("PAREGGIO!");
+			}
+
 			chiudiConnessione();
 			f.attivaCaselleClient(this.tris);
 		}else {
@@ -219,7 +228,7 @@ public class Client_P2 implements Runnable, Player{
 		}
 
 	}
-	
+
 	public void erroreConnessione() {
 		s.release();
 		JOptionPane.showMessageDialog(f, "Errore di connessione");
