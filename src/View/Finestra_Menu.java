@@ -36,6 +36,9 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * La classe rappresenta la finestra grafica tramite la quale l'utente si interfacia con il programma
+ */
 public class Finestra_Menu extends JFrame {
 
 	private JPanel contentPaneMenu;
@@ -97,7 +100,9 @@ public class Finestra_Menu extends JFrame {
 	private JPanel panelResultClient;
 	private JLabel labelResultClient;
 	private JButton btnOkClient;
-
+/**
+ * @param n indica lo stile grafico con cui avviarla
+ */
 	public Finestra_Menu(int n) {
 		if(n==0) {
 			try {
@@ -809,7 +814,9 @@ public class Finestra_Menu extends JFrame {
 	}
 
 
-
+	/**
+	 * Il metodo rende non cliccabili le celle che compongono il tris del Player 1 
+	 */
 	public void bloccaCaselleServer() {
 		this.getButtonServer().setEnabled(false);
 		this.getButton_1Server().setEnabled(false);
@@ -822,6 +829,9 @@ public class Finestra_Menu extends JFrame {
 		this.getButton_8Server().setEnabled(false);
 	}
 
+	/**
+	 * Il metodo rende cliccabili le celle che compongono il tris del Player 1 
+	 */
 	public void attivaCaselleServer(Tris tris) {
 		ImageIcon imgcerchio= new ImageIcon("src/img/cerchio.png");
 		ImageIcon imgcroce= new ImageIcon("src/img/croce.png");
@@ -891,6 +901,9 @@ public class Finestra_Menu extends JFrame {
 			this.getButton_8Server().setEnabled(true);
 	}
 
+	/**
+	 * Il metodo reimposta le celle del tris del Player 1
+	 */
 	public void resettaCelleServer() {
 		this.getButtonServer().setIcon(null);
 		this.getButton_1Server().setIcon(null);
@@ -903,6 +916,9 @@ public class Finestra_Menu extends JFrame {
 		this.getButton_8Server().setIcon(null);
 	}
 
+	/**
+	 * Il metodo rende non cliccabili le celle che compongono il tris del Player 2 
+	 */
 	public void bloccaCaselleClient() {
 		this.getButtonClient().setEnabled(false);
 		this.getButton_1Client().setEnabled(false);
@@ -914,6 +930,10 @@ public class Finestra_Menu extends JFrame {
 		this.getButton_7Client().setEnabled(false);
 		this.getButton_8Client().setEnabled(false);
 	}
+	
+	/**
+	 * Il metodo rende cliccabili le celle che compongono il tris del Player 2
+	 */
 	public void attivaCaselleClient(Tris tris) {
 		ImageIcon imgcerchio= new ImageIcon("src/img/cerchio.png");
 		ImageIcon imgcroce= new ImageIcon("src/img/croce.png");
@@ -984,6 +1004,9 @@ public class Finestra_Menu extends JFrame {
 			this.getButton_8Client().setEnabled(true);
 	}
 
+	/**
+	 * Il metodo reimposta le celle del tris del Player 2
+	 */
 	public void resettaCelleClient() {
 		this.getButtonClient().setIcon(null);
 		this.getButton_1Client().setIcon(null);

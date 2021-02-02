@@ -10,7 +10,9 @@ import javax.swing.JFrame;
 import Model.Client_P2;
 import Model.Server_P1;
 import View.Finestra_Menu;
-
+/**
+ * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al menù
+ */
 public class Controller_Menu implements ActionListener{
 	private Finestra_Menu f;
 	private int colore;

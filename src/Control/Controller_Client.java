@@ -14,7 +14,9 @@ import Model.Casella;
 import Model.Client_P2;
 import Model.Tris;
 import View.Finestra_Menu;
-
+/**
+ * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al Player 1
+ */
 public class Controller_Client implements ActionListener{
 
 	private Finestra_Menu f;
@@ -135,7 +137,11 @@ public class Controller_Client implements ActionListener{
 
 		}
 	}
-
+	/**
+	 * Il metodo avvia le operazioni sucessive alla pressione di una cella del tris
+	 * @param b bottone premuto
+	 * @param cs casella selezionata
+	 */
 	public void avvioCasella(JButton b, Casella cs) {
 		c.getTris().addSegno(2, cs);
 		b.setIcon(imgcroce);
@@ -147,8 +153,11 @@ public class Controller_Client implements ActionListener{
 		}else
 			terminaPartita(v);
 	}
-
-public void terminaPartita(int v) {
+	/**
+	 * Il metodo effettena le operazioni sucessive al termine della partita
+	 * @param probabili vincitore
+	 */
+	public void terminaPartita(int v) {
 
 		if(v==2) {
 			JOptionPane.showMessageDialog(f, "HAI VINTO");
@@ -183,6 +192,9 @@ public void terminaPartita(int v) {
 
 	}
 
+	/**
+	 * Il metodo aggiorna le etichette riguardanti i turni e le vittorie dei Player
+	 */
 	public void aggiornaLbl() {
 		f.getLblTurniRimanentiClient().setText("Turni rimanenti : "+(c.getTurni()-1));
 		f.getLblVittorieP2Client().setText("Vittorie "+c.getNome()+" : "+c.getVittorieP2());

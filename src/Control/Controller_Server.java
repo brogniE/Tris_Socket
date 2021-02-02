@@ -15,7 +15,9 @@ import Model.Casella;
 import Model.Server_P1;
 import Model.Tris;
 import View.Finestra_Menu;
-
+/**
+ * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al Player 2
+ */
 public class Controller_Server implements ActionListener{
 
 	private Finestra_Menu f;
@@ -144,14 +146,18 @@ public class Controller_Server implements ActionListener{
 		}
 
 	}
-
+	/**
+	 * Il metodo effettua il cambio dei pannelli sucessivo alla corretta conessione dei giocatori
+	 */
 	public void AvvioPartita() {
 		f.getPanelMenu().setVisible(false);
 		f.getPanelServerWait().setVisible(false);
 		f.getPanelServerPlay().setVisible(false);
 		f.getPanelStartServer().setVisible(true);
 	}
-
+	/**
+	 * Il metodo effettua il cambio dei pannelli sucessivi allo scambio del pacchetto di avvio tra i due giocatori
+	 */
 	public void avviaGioco() {
 		f.getPanelMenu().setVisible(false);
 		f.getPanelServerWait().setVisible(false);
@@ -162,8 +168,11 @@ public class Controller_Server implements ActionListener{
 		f.resettaCelleServer();
 		f.attivaCaselleServer(s.getTris());
 	}
-
-
+	/**
+	 * Il metodo avvia le operazioni sucessive alla pressione di una cella del tris
+	 * @param b bottone premuto
+	 * @param c casella selezionata
+	 */
 	public void avvioCasella(JButton b, Casella c) {
 		s.getTris().addSegno(1, c);
 		b.setIcon(imgcerchio);
@@ -175,7 +184,10 @@ public class Controller_Server implements ActionListener{
 		}else
 			terminaPartita(v);
 	}
-
+	/**
+	 * Il metodo effettena le operazioni sucessive al termine della partita
+	 * @param probabili vincitore
+	 */
 	public void terminaPartita(int v) {
 
 		if(v==1) {
@@ -210,6 +222,9 @@ public class Controller_Server implements ActionListener{
 
 	}
 
+	/**
+	 * Il metodo aggiorna le etichette riguardanti i turni e le vittorie dei Player
+	 */
 	public void aggiornaLbl() {
 		f.getLblTurniRimanentiServer().setText("Turni rimanenti : "+(s.getTurni()-1));
 		f.getLblVittorieP1Server().setText("Vittorie "+s.getNome()+" : "+s.getVittorieP1());
