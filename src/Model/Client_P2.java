@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
 import Control.Controller_Client;
 import Control.Controller_Menu;
 import View.Finestra_Menu;
-
+/**
+ * La classe rappresenta il Player 2 che oltre a svolgere le azioni dell'interfaccia Player svolge il compito di ospite della partita di tris
+ */
 public class Client_P2 implements Runnable, Player{
 	private String ipServer;
 	private Socket socket;
@@ -28,7 +30,12 @@ public class Client_P2 implements Runnable, Player{
 
 	private int vittorieP1=0;
 	private int vittorieP2=0;
-
+	/**
+	 * Metodo costruttore utilizzato se non è ancora stato creato nessuno Controller_Client
+	 * @param f finestra grafica 
+	 * @param s semaforo per la sincronizzazione e per la mutua esclusione
+	 * @param ctm classe controller del menu
+	 */
 	public Client_P2(Finestra_Menu f, Semaphore s, Controller_Menu ctm) {
 		super();
 		this.f=f;
@@ -37,7 +44,12 @@ public class Client_P2 implements Runnable, Player{
 		tris=new Tris();
 		this.s=s;
 	}
-
+	/**
+	 * Metodo costruttore utilizzato se è già stato creato Controller_Client
+	 * @param f finestra grafica
+	 * @param s	semaforo per la sincronizzazione e per la mutua esclusione
+	 * @param ct classe controller del client
+	 */
 	public Client_P2(Finestra_Menu f, Semaphore s, Controller_Client ct) {
 		super();
 		this.f=f;

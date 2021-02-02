@@ -4,13 +4,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
-
+/**
+ * La classe ha il compito di effettuare la ricezione di un qualunque pacchetto inviato dall'avversario
+ */
 public class RiceviPacchetto implements Runnable{
 	private Object pacchetto;
 	private Socket socket;
 	private Semaphore s;
 	private Player c;
-	
+	/**
+	 * @param socket socket su cui effettuare la ricezione del pacchetto
+	 * @param c il player che vuole ricevere tale pacchetto
+	 * @param s	il semaforo per mettere in mutua esclusione il socket e sincronizzare l'invio e la recezione
+	 */
 	public RiceviPacchetto(Socket socket, Player c, Semaphore s) {
 		super();
 		this.socket = socket;

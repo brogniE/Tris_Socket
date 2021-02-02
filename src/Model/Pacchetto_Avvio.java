@@ -1,11 +1,16 @@
 package Model;
 
 import java.io.Serializable;
-
+/**
+ * La classe rappresenta il pacchetto di avvio con il quale i Player si scambiano le informazioni riguardanti le informazioni sul nome e il numero di turni
+ */
 public class Pacchetto_Avvio implements Serializable{
 	private String nome;
 	private int turni;
-	
+	/**
+	 * @param nome nome del giocatore che ha inviato il pacchetto
+	 * @param turni numero di turni totali
+	 */
 	public Pacchetto_Avvio(String nome, int turni) {
 		super();
 		this.nome = nome;

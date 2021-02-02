@@ -1,5 +1,9 @@
 package Model;
 
+/**
+ * La classe Tris rappresenta la tabella che compone il gioco del tris
+ * **/
+
 public class Tris {
 	private int tris[][];
 
@@ -11,7 +15,14 @@ public class Tris {
 				tris[i][j]=0;
 		}
 	}
-	
+	/**
+	 * Il metodo effettua un controllo sulla tabella
+	 * @return:
+	 * 		0 nel caso in cui il gioco non sia ancora finito e nessuno abbia vinto, 
+	 * 		1 se il giocatore vincente è il Player 1, 
+	 * 		2 se il giocatore vincente è il Player 2,
+	 * 		3 se il gioco è terminato ed è avvenutto un pareggio
+	 * **/
 	public int ControllaVincitore() {
 		int vincitore = 0;
 		int x = 0;
@@ -52,7 +63,10 @@ public class Tris {
 	public int getCella(int x, int y) {
 		return tris[x][y];
 	}
-	
+	/**
+	 * Il metodo controlla se è avvenuto il pareggio
+	 * @return 3 se è pareggio, 0 se non è pareggio
+	 */
 	public int pareggio() {
 		int i = 0;
 		int j = 0;
@@ -77,6 +91,9 @@ public class Tris {
 		tris[c.getX()][c.getY()]=player;
 	}
 	
+	/**
+	 * Il metodo riporta tutte le celle del tris a valore 0
+	 */
 	public void azzera() {
 		for(int i=0; i<3;i++) {
 			for(int j=0;j<3;j++)
