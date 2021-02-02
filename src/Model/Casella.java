@@ -2,7 +2,7 @@ package Model;
 
 import java.io.Serializable;
 /**
- * La classe Casellla rappresenta un'oggetto equivalente ad una cella della tabella del gioco tris e viene utilizzata come messaggio che i due Player si scambiano
+ * La classe Casella rappresenta un'oggetto equivalente ad una cella della tabella del gioco tris e viene utilizzata come messaggio che i due Player si scambiano
  * **/
 public class Casella implements Serializable{
 	private int x;
@@ -16,7 +16,7 @@ public class Casella implements Serializable{
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public int getX() {
 		return x;
 	}
@@ -35,7 +35,7 @@ public class Casella implements Serializable{
 		return "Casella [x=" + x + ", y=" + y + "]";
 	}
 
-	
-	
-	
+
+
+
 }

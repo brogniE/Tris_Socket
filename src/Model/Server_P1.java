@@ -30,8 +30,8 @@ public class Server_P1 implements Runnable, Player{
 	private int vittorieP1=0;
 	private int vittorieP2=0;
 	/**
-	 * Metodo costruttore utilizzato se non Ë ancora stato creato nessuno Controller_Server
-	 * @param f finestra grafica 
+	 * Metodo costruttore utilizzato se non √® ancora stato creato nessun Controller_Server
+	 * @param f finestra grafica
 	 * @param s semaforo per la sincronizzazione e per la mutua esclusione
 	 * @param ctm classe controller del menu
 	 */
@@ -46,7 +46,7 @@ public class Server_P1 implements Runnable, Player{
 		ct.AvvioPartita();
 	}
 	/**
-	 * Metodo costruttore utilizzato se Ë gi‡ stato creato Controller_Server
+	 * Metodo costruttore utilizzato se √® gi√† stato creato Controller_Server
 	 * @param f finestra grafica
 	 * @param s	semaforo per la sincronizzazione e per la mutua esclusione
 	 * @param ct classe controller del server

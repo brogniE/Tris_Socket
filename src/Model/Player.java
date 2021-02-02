@@ -4,12 +4,12 @@ package Model;
  */
 public interface Player {
 	/**
-	 * Il metodo deve aggiornare le proprie informazioni sucessivamente alla recezione di una cella da parte del secondo Player
+	 * Il metodo deve aggiornare le proprie informazioni successivamente alla ricezione di una cella da parte del secondo Player
 	 * @param c La cella inviata dal Player avversario
 	 */
 	public void risposta(Casella c);
 	/**
-	 * Il metodo deve gestire gli errori di conessione
+	 * Il metodo deve gestire gli errori di connessione
 	 */
 	public void erroreConnessione();
 	/**
@@ -17,16 +17,12 @@ public interface Player {
 	 */
 	public void chiudiConnessione();
 	/**
-	 * Il metodo invia al Player avversario la casellla selezionata
+	 * Il metodo invia al Player avversario la casella selezionata
 	 * @param c casella selezionata dall'utente
 	 */
 	public void inviaCasella(Casella c);
 	/**
-	 * Il metodo attende la ricezione di una risposta da parte dell'avversario
-	 */
-	public Casella riceviCasella();
-	/**
-	 * Il metodo avvia i controlli e le azioni sucessive al termine della partita
+	 * Il metodo avvia i controlli e le azioni successive al termine della partita
 	 * @param v	probabile vincitore
 	 */
 	public void terminaPartita(int v);

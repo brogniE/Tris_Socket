@@ -18,10 +18,10 @@ public class Tris {
 	/**
 	 * Il metodo effettua un controllo sulla tabella
 	 * @return:
-	 * 		0 nel caso in cui il gioco non sia ancora finito e nessuno abbia vinto, 
-	 * 		1 se il giocatore vincente è il Player 1, 
-	 * 		2 se il giocatore vincente è il Player 2,
-	 * 		3 se il gioco è terminato ed è avvenutto un pareggio
+	 * 		0 nel caso in cui il gioco non sia ancora finito e nessuno abbia vinto,
+	 * 		1 se il giocatore vincente Ã¨ il Player 1,
+	 * 		2 se il giocatore vincente Ã¨ il Player 2,
+	 * 		3 se il gioco ï¿½ terminato ed Ã¨ avvenutto un pareggio
 	 * **/
 	public int ControllaVincitore() {
 		int vincitore = 0;
@@ -59,19 +59,19 @@ public class Tris {
 
 		return vincitore;
 	}
-	
+
 	public int getCella(int x, int y) {
 		return tris[x][y];
 	}
 	/**
-	 * Il metodo controlla se è avvenuto il pareggio
-	 * @return 3 se è pareggio, 0 se non è pareggio
+	 * Il metodo controlla se Ã¨ avvenuto il pareggio
+	 * @return 3 se Ã¨ pareggio, 0 se non Ã¨ pareggio
 	 */
 	public int pareggio() {
 		int i = 0;
 		int j = 0;
 		int vincitore = 3;
-		
+
 		while(vincitore==3 && i<3) {
 			j=0;
 			while(vincitore==3 && j<3) {
@@ -82,15 +82,15 @@ public class Tris {
 			}
 			i++;
 		}
-		
+
 		return vincitore;
 	}
-	
-	
+
+
 	public void addSegno(int player, Casella c) {
 		tris[c.getX()][c.getY()]=player;
 	}
-	
+
 	/**
 	 * Il metodo riporta tutte le celle del tris a valore 0
 	 */
@@ -99,6 +99,6 @@ public class Tris {
 			for(int j=0;j<3;j++)
 				tris[i][j]=0;
 		}
-	
+
 	}
 }

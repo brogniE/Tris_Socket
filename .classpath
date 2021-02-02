@@ -7,6 +7,5 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/sarab/Documents/Tris_Socket/flatlaf-demo-0.36.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrico/Desktop/java project/Tris_Funziona/flatlaf-demo-0.36.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

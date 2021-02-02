@@ -15,7 +15,7 @@ import Model.Client_P2;
 import Model.Tris;
 import View.Finestra_Menu;
 /**
- * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al Player 1
+ * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al Player 2
  */
 public class Controller_Client implements ActionListener{
 
@@ -138,7 +138,7 @@ public class Controller_Client implements ActionListener{
 		}
 	}
 	/**
-	 * Il metodo avvia le operazioni sucessive alla pressione di una cella del tris
+	 * Il metodo avvia le operazioni successive alla pressione di una cella del tris
 	 * @param b bottone premuto
 	 * @param cs casella selezionata
 	 */
@@ -154,8 +154,8 @@ public class Controller_Client implements ActionListener{
 			terminaPartita(v);
 	}
 	/**
-	 * Il metodo effettena le operazioni sucessive al termine della partita
-	 * @param probabili vincitore
+	 * Il metodo effettua le operazioni successive al termine della partita
+	 * @param probabile vincitore
 	 */
 	public void terminaPartita(int v) {
 

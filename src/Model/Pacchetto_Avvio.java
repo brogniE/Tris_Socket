@@ -2,7 +2,7 @@ package Model;
 
 import java.io.Serializable;
 /**
- * La classe rappresenta il pacchetto di avvio con il quale i Player si scambiano le informazioni riguardanti le informazioni sul nome e il numero di turni
+ * La classe rappresenta il pacchetto di avvio con il quale i Player si scambiano le informazioni riguardanti il nome e il numero di turni
  */
 public class Pacchetto_Avvio implements Serializable{
 	private String nome;
@@ -16,7 +16,7 @@ public class Pacchetto_Avvio implements Serializable{
 		this.nome = nome;
 		this.turni = turni;
 	}
-	
+
 	public Pacchetto_Avvio(String nome) {
 		super();
 		this.nome = nome;
@@ -38,6 +38,6 @@ public class Pacchetto_Avvio implements Serializable{
 	public void setTurni(int turni) {
 		this.turni = turni;
 	}
-	
-	
+
+
 }

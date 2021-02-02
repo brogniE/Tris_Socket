@@ -11,7 +11,7 @@ import Model.Client_P2;
 import Model.Server_P1;
 import View.Finestra_Menu;
 /**
- * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al menù
+ * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al menÃ¹
  */
 public class Controller_Menu implements ActionListener{
 	private Finestra_Menu f;
@@ -63,13 +63,13 @@ public class Controller_Menu implements ActionListener{
 
 			Semaphore semaforoClient = new Semaphore(0);
 			Client_P2 client;
-			if(ctc==null) 
+			if(ctc==null)
 				client = new Client_P2(f, semaforoClient, this);
 			else
 				client = new  Client_P2(f, semaforoClient, ctc);
 
 		}
-		
+
 		if(e.getSource()==f.getBtnImpostazioni()) {
 			f.dispose();
 			colore=(colore+1)%2;

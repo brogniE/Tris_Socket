@@ -31,8 +31,8 @@ public class Client_P2 implements Runnable, Player{
 	private int vittorieP1=0;
 	private int vittorieP2=0;
 	/**
-	 * Metodo costruttore utilizzato se non Ë ancora stato creato nessuno Controller_Client
-	 * @param f finestra grafica 
+	 * Metodo costruttore utilizzato se non √® ancora stato creato nessun Controller_Client
+	 * @param f finestra grafica
 	 * @param s semaforo per la sincronizzazione e per la mutua esclusione
 	 * @param ctm classe controller del menu
 	 */
@@ -45,7 +45,7 @@ public class Client_P2 implements Runnable, Player{
 		this.s=s;
 	}
 	/**
-	 * Metodo costruttore utilizzato se Ë gi‡ stato creato Controller_Client
+	 * Metodo costruttore utilizzato se √® gi√† stato creato Controller_Client
 	 * @param f finestra grafica
 	 * @param s	semaforo per la sincronizzazione e per la mutua esclusione
 	 * @param ct classe controller del client

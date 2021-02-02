@@ -16,7 +16,7 @@ import Model.Server_P1;
 import Model.Tris;
 import View.Finestra_Menu;
 /**
- * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al Player 2
+ * La classe gestisce gli eventi dei pannelli della finestra grafica relativi al Player 1
  */
 public class Controller_Server implements ActionListener{
 
@@ -147,7 +147,7 @@ public class Controller_Server implements ActionListener{
 
 	}
 	/**
-	 * Il metodo effettua il cambio dei pannelli sucessivo alla corretta conessione dei giocatori
+	 * Il metodo effettua il cambio dei pannelli successivo alla corretta conessione dei giocatori
 	 */
 	public void AvvioPartita() {
 		f.getPanelMenu().setVisible(false);
@@ -156,7 +156,7 @@ public class Controller_Server implements ActionListener{
 		f.getPanelStartServer().setVisible(true);
 	}
 	/**
-	 * Il metodo effettua il cambio dei pannelli sucessivi allo scambio del pacchetto di avvio tra i due giocatori
+	 * Il metodo effettua il cambio dei pannelli successivi allo scambio del pacchetto di avvio tra i due giocatori
 	 */
 	public void avviaGioco() {
 		f.getPanelMenu().setVisible(false);
@@ -169,7 +169,7 @@ public class Controller_Server implements ActionListener{
 		f.attivaCaselleServer(s.getTris());
 	}
 	/**
-	 * Il metodo avvia le operazioni sucessive alla pressione di una cella del tris
+	 * Il metodo avvia le operazioni successive alla pressione di una cella del tris
 	 * @param b bottone premuto
 	 * @param c casella selezionata
 	 */
@@ -185,7 +185,7 @@ public class Controller_Server implements ActionListener{
 			terminaPartita(v);
 	}
 	/**
-	 * Il metodo effettena le operazioni sucessive al termine della partita
+	 * Il metodo effettu le operazioni successive al termine della partita
 	 * @param probabili vincitore
 	 */
 	public void terminaPartita(int v) {

@@ -15,7 +15,7 @@ public class RiceviPacchetto implements Runnable{
 	/**
 	 * @param socket socket su cui effettuare la ricezione del pacchetto
 	 * @param c il player che vuole ricevere tale pacchetto
-	 * @param s	il semaforo per mettere in mutua esclusione il socket e sincronizzare l'invio e la recezione
+	 * @param s	il semaforo per mettere in mutua esclusione il socket e sincronizzare l'invio e la ricezione
 	 */
 	public RiceviPacchetto(Socket socket, Player c, Semaphore s) {
 		super();
@@ -24,9 +24,9 @@ public class RiceviPacchetto implements Runnable{
 		this.pacchetto=new Casella(-1, -1);
 		this.s=s;
 	}
-	
-	
-	
+
+
+
 	public Object getPacchetto() {
 		return pacchetto;
 	}
@@ -46,7 +46,7 @@ public class RiceviPacchetto implements Runnable{
 			pacchetto= streamPacchettoIn.readObject();
 			System.out.println("ho ricevuto "+pacchetto);
 			c.risposta((Casella)pacchetto);
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			c.erroreConnessione();
