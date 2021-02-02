@@ -186,7 +186,7 @@ public class Controller_Server implements ActionListener{
 	}
 	/**
 	 * Il metodo effettu le operazioni successive al termine della partita
-	 * @param probabili vincitore
+	 * @param v probabili vincitore
 	 */
 	public void terminaPartita(int v) {
 

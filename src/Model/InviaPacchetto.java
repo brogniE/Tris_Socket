@@ -14,7 +14,7 @@ public class InviaPacchetto implements Runnable{
 	private Player c;
 	/**
 	 * @param pacchetto oggetto da inviare
-	 * @param @param socket socket su cui effettuare l'invio del pacchetto
+	 * @param socket socket su cui effettuare l'invio del pacchetto
 	 * @param c il player che vuole inviare tale pacchetto
 	 * @param s	il semaforo per mettere in mutua esclusione il socket e sincronizzare l'invio e la ricezione
 	 */

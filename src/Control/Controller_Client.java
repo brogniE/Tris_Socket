@@ -155,7 +155,7 @@ public class Controller_Client implements ActionListener{
 	}
 	/**
 	 * Il metodo effettua le operazioni successive al termine della partita
-	 * @param probabile vincitore
+	 * @param v probabile vincitore
 	 */
 	public void terminaPartita(int v) {
 
